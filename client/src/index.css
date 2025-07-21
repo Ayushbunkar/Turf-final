@@ -1,0 +1,40 @@
+/* PLEASE NOTE: THESE TAILWIND IMPORTS SHOULD NEVER BE DELETED */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/* DO NOT DELETE THESE TAILWIND IMPORTS, OTHERWISE THE STYLING WILL NOT RENDER AT ALL */
+/* Custom styles for Swiper */
+.testimonial-swiper,
+.feature-swiper {
+  padding: 30px 0;
+}
+.swiper-pagination-bullet {
+  background: #16a34a;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #16a34a;
+}
+/* 3D perspective styles */
+.transform-gpu {
+  transform: perspective(1000px);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+/* Animated gradient background */
+.bg-animated-gradient {
+  background: linear-gradient(-45deg, #16a34a, #22c55e, #4ade80, #86efac);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
