@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../components/ui/Button';
+import Button from '../components/ui/Button.jsx';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
