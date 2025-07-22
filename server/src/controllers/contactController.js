@@ -1,20 +1,28 @@
 import Contact from '../models/Contact.js';
 import { sendEmail } from '../utils/sendEmail.js';
 
-export const submitContact = async (req, res) => {
+export const submitContactForm = async (req, res) => {
   const { fullname, email, feedback } = req.body;
-  try {
-    const message = new Contact({ fullname, email, feedback });
-    await message.save();
 
+  try {
+    const newMessage = new Contact({ fullname, email, feedback });
+    await newMessage.save();
+
+    // Optional: Send notification to admin (you can customize the recipient)
     await sendEmail(
-      process.env.EMAIL_USER,
+      'admin@yourdomain.com',
       'New Contact Message',
-      `<h3>${fullname}</h3><p>${feedback}</p><p><strong>From:</strong> ${email}</p>`
+      `<h4>New Contact Message</h4>
+       <p><strong>Name:</strong> ${fullname}</p>
+       <p><strong>Email:</strong> ${email}</p>
+       <p><strong>Feedback:</strong><br>${feedback}</p>`
     );
 
-    res.status(200).json({ message: 'Message sent successfully' });
+    res.status(201).json({ message: 'Message submitted successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Contact failed', error: err.message });
+    res.status(500).json({
+      message: 'Failed to submit message',
+      error: err.message,
+    });
   }
 };

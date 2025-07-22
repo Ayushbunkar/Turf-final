@@ -12,10 +12,12 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import { Toaster } from 'react-hot-toast';
 export function App() {
   return <Router>
       <div className="flex flex-col min-h-screen bg-gray-50">
         <Navbar />
+         <Toaster position="top-right" reverseOrder={false} />
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />

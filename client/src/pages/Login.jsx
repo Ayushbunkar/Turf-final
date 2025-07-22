@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 import Button from '../components/ui/Button.jsx';
 
 const Login = () => {
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post('http://localhost:4500/api/auth/login', formData);
+      toast.success('Login successful!');
+      
+      // Save token or user info as needed
+      localStorage.setItem('token', res.data.token);
+
+      // Navigate to dashboard or home
+      navigate('/dashboard');
+    } catch (err) {
+      const message = err.response?.data?.message || 'Login failed';
+      toast.error(message);
+    }
+  };
+
   return (
     <div className="min-h-screen pt-20 bg-gray-50 flex items-center justify-center">
       <div className="container mx-auto px-4 py-16">
@@ -17,39 +44,34 @@ const Login = () => {
             <h2 className="text-2xl font-bold text-center mb-6">
               Login to <span className="text-green-600">TurfTime</span>
             </h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label
-                  htmlFor="email"
-                  className="block text-gray-700 text-sm font-medium mb-2"
-                >
+                <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   placeholder="Enter your email"
                 />
               </div>
               <div className="mb-6">
-                <label
-                  htmlFor="password"
-                  className="block text-gray-700 text-sm font-medium mb-2"
-                >
+                <label htmlFor="password" className="block text-gray-700 text-sm font-medium mb-2">
                   Password
                 </label>
                 <input
                   type="password"
                   id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   placeholder="Enter your password"
                 />
-                <div className="mt-1 text-right">
-                  <a href="#" className="text-sm text-green-600 hover:text-green-700">
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <Button type="submit" fullWidth>
                 Login
@@ -57,7 +79,7 @@ const Login = () => {
             </form>
             <div className="mt-6 text-center">
               <p className="text-gray-600">
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link to="/signup" className="text-green-600 hover:text-green-700 font-medium">
                   Sign up
                 </Link>

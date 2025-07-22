@@ -34,7 +34,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:4500/api/auth/register', formData);
+      const response = await axios.post('http://localhost:4500/api/auth/signup', formData);
       toast.success('Account created successfully!');
       navigate('/login');
     } catch (error) {

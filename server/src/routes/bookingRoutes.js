@@ -4,12 +4,11 @@ import {
   getBookingsByEmail,
   cancelBooking,
 } from '../controllers/bookingController.js';
-import { authenticate } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', authenticate, createBooking);
-router.get('/', authenticate, getBookingsByEmail);
-router.delete('/:id', authenticate, cancelBooking);
+router.post('/', createBooking);
+router.get('/', getBookingsByEmail);
+router.delete('/:id', cancelBooking);
 
 export default router;
