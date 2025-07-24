@@ -6,25 +6,27 @@ import { CalendarIcon } from 'lucide-react';
 
 const CallToAction = () => {
   return (
-    <section className="py-16 bg-green-600">
+    <section className="py-12 md:py-16 bg-green-600">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Text Block */}
           <motion.div
-            className="mb-6 md:mb-0 md:max-w-xl"
+            className="text-center md:text-left md:max-w-xl"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 md:mb-4">
               Ready to Play?
             </h2>
-            <p className="text-green-100 text-lg">
+            <p className="text-green-100 text-base sm:text-lg">
               Book your turf now and experience the best playing conditions for
               your game. Special discounts available for weekday bookings!
             </p>
           </motion.div>
 
+          {/* Button */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -32,7 +34,11 @@ const CallToAction = () => {
             viewport={{ once: true }}
           >
             <Link to="/turfs">
-              <Button variant="secondary" size="lg" className="shadow-lg">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="shadow-lg flex items-center justify-center w-full sm:w-auto"
+              >
                 <CalendarIcon size={20} className="mr-2" />
                 Book a Turf Now
               </Button>

@@ -9,7 +9,7 @@ import {
   UsersIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  TrophyIcon // New icon
+  TrophyIcon
 } from 'lucide-react';
 
 const featuresList = [
@@ -69,51 +69,49 @@ const Features = () => {
   const prevSlide = () => setCurrentIndex((prev) => (prev === 0 ? featuresList.length - 1 : prev - 1));
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 3000);
+    const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section className="py-20 bg-white" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section className="py-16 sm:py-20 bg-white" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Why Choose <span className="text-green-600">TurfTime</span>?
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            We provide the best turf booking experience with premium facilities
-            and seamless service.
+          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+            We provide the best turf booking experience with premium facilities and seamless service.
           </p>
         </motion.div>
 
-        {/* Desktop Grid View */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid for Desktop and Tablet */}
+        <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuresList.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 group"
+              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition border border-gray-100"
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.05 }}
               whileHover={{ scale: 1.03 }}
             >
-              {/* Removed icon hover animation */}
               <div className="mb-4">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="text-gray-600 text-sm">{feature.description}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Mobile Carousel */}
-        <div className="md:hidden relative">
+        {/* Carousel for Mobile */}
+        <div className="md:hidden relative mt-6">
           <div className="overflow-hidden">
             <motion.div
               className="bg-white p-6 rounded-lg shadow-md border border-gray-100 h-full"
@@ -122,42 +120,42 @@ const Features = () => {
               transition={{ duration: 0.5 }}
               key={currentIndex}
             >
-              <div className="mb-4 flex justify-center">
-                {featuresList[currentIndex].icon}
-              </div>
+              <div className="mb-4 flex justify-center">{featuresList[currentIndex].icon}</div>
               <h3 className="text-xl font-semibold mb-2 text-center">
                 {featuresList[currentIndex].title}
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-gray-600 text-center text-sm">
                 {featuresList[currentIndex].description}
               </p>
             </motion.div>
           </div>
 
-          {/* Navigation */}
-          <div className="flex justify-center mt-4">
+          {/* Navigation Dots & Buttons */}
+          <div className="flex justify-center mt-4 items-center gap-4">
             <button
               onClick={prevSlide}
-              className="mx-2 p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-200"
+              className="p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-200"
               aria-label="Previous slide"
             >
               <ChevronLeftIcon size={20} />
             </button>
-            <div className="flex items-center mx-4">
+
+            <div className="flex gap-1">
               {featuresList.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 mx-1 rounded-full ${
+                  className={`w-2 h-2 rounded-full ${
                     currentIndex === index ? 'bg-green-600' : 'bg-gray-300'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
             </div>
+
             <button
               onClick={nextSlide}
-              className="mx-2 p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-200"
+              className="p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-200"
               aria-label="Next slide"
             >
               <ChevronRightIcon size={20} />

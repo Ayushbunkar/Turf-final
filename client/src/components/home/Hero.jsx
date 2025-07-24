@@ -1,10 +1,56 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useMotionValue, useAnimation } from 'framer-motion';
 import { ArrowRightIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../ui/Button.jsx';
+import footballImg from '../../assets/football.png';
 
 const Hero = () => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const controls = useAnimation();
+  const [isMoving, setIsMoving] = useState(false);
+  let timer;
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const offsetX = (e.clientX - centerX) / 20;
+      const offsetY = (e.clientY - centerY) / 20;
+
+      x.set(offsetX);
+      y.set(offsetY);
+      setIsMoving(true);
+
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setIsMoving(false);
+      }, 2000);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(timer);
+    };
+  }, [x, y]);
+
+  useEffect(() => {
+    if (!isMoving) {
+      controls.start({
+        y: [0, -20, 0],
+        transition: {
+          duration: 2,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        },
+      });
+    } else {
+      controls.stop();
+    }
+  }, [isMoving, controls]);
+
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image */}
@@ -23,7 +69,7 @@ const Hero = () => {
         </motion.div>
         <div className="absolute inset-0 bg-black bg-opacity-60" />
 
-        {/* Animated Floating Particles */}
+        {/* Floating Particles */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <motion.div
@@ -56,7 +102,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
               Book Your Perfect{' '}
               <motion.span
                 className="text-green-500 inline-block"
@@ -73,13 +119,13 @@ const Hero = () => {
           </motion.div>
 
           <motion.p
-            className="text-xl text-gray-200 mb-8"
+            className="text-lg md:text-xl text-gray-200 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Experience the thrill of playing on premium turfs. Easy booking,
-            great facilities, and unforgettable moments await you.
+            Experience the thrill of playing on premium turfs. Easy booking, great facilities,
+            and unforgettable moments await you.
           </motion.p>
 
           <motion.div
@@ -105,67 +151,17 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* 3D Football Animation */}
+        {/* Football Animation */}
         <motion.div
-          className="hidden lg:block absolute right-20 bottom-20"
-          initial={{ opacity: 0, scale: 0.8, rotateZ: -15 }}
-          animate={{ opacity: 1, scale: 1, rotateZ: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
+          className="hidden lg:block absolute right-10 bottom-16 w-32 md:w-40 h-32 md:h-40"
+          style={{ x, y }}
+          animate={controls}
         >
-          <motion.div
-            className="w-32 h-32 relative"
-            animate={{ rotateY: 360, rotateZ: [0, 10, -10, 0] }}
-            transition={{
-              rotateY: {
-                duration: 8,
-                repeat: Infinity,
-                ease: 'linear',
-              },
-              rotateZ: {
-                duration: 3,
-                repeat: Infinity,
-                repeatType: 'reverse',
-              },
-            }}
-          >
-            <div className="w-full h-full rounded-full bg-white shadow-[0_0_40px_rgba(74,222,128,0.6)] relative">
-              <div className="absolute inset-0 rounded-full bg-white border-8 border-green-500 opacity-80"></div>
-              <div className="absolute inset-[10px] rounded-full bg-gradient-to-br from-white to-gray-200 flex items-center justify-center">
-                {/* Football Pattern Dots */}
-                <div className="absolute w-full h-full rounded-full">
-                  {[...Array(5)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute w-4 h-4 rounded-full bg-black opacity-80"
-                      style={{
-                        top: `${20 + Math.sin((i * 72 * Math.PI) / 180) * 30}%`,
-                        left: `${50 + Math.cos((i * 72 * Math.PI) / 180) * 30}%`,
-                      }}
-                    />
-                  ))}
-                  {[...Array(6)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute w-[2px] h-[40%] bg-black opacity-60 origin-bottom"
-                      style={{
-                        top: '10%',
-                        left: '50%',
-                        transform: `translateX(-50%) rotate(${i * 60}deg)`,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Glow & Shadow */}
-            <div className="absolute -bottom-8 left-0 w-full h-4 bg-black opacity-20 rounded-full blur-md"></div>
-            <motion.div
-              className="absolute inset-0 rounded-full bg-green-500 opacity-30 blur-md"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
+          <img
+            src={footballImg}
+            alt="Football"
+            className="w-full h-full object-cover rounded-full border-4 border-white shadow-xl"
+          />
         </motion.div>
       </div>
     </div>
