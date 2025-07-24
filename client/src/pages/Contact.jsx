@@ -25,7 +25,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 bg-white">
+    <div className="min-h-screen pt-10 bg-white">
       <section className="py-16 bg-green-600">
         <div className="container mx-auto px-4">
           <motion.div

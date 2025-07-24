@@ -4,60 +4,67 @@ import { StarIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Michael Johnson',
-    role: 'Football Enthusiast',
-    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+    name: 'lalit bhai',
+    role: 'Weekend Cricketer',
+    image: 'https://randomuser.me/api/portraits/men/80.jpg',
     rating: 5,
-    text: 'TurfTime has revolutionized how we book our weekly football matches. The turfs are always in perfect condition and booking is super easy!'
+    text: 'TurfTime makes weekend matches hassle-free. Booking is seamless and the turf quality is top-notch!'
   },
   {
-    name: 'Sarah Williams',
-    role: 'Team Captain',
-    image: 'https://randomuser.me/api/portraits/women/44.jpg',
+    name: 'shreyaa Sharma',
+    role: 'College Footballer',
+    image: 'https://randomuser.me/api/portraits/women/79.jpg',
     rating: 5,
-    text: 'As a team captain, I need reliability and quality. TurfTime delivers both consistently. Their customer service is also outstanding.'
+    text: 'Our college team always uses TurfTime for booking matches. It’s reliable and fast!'
   },
   {
-    name: 'David Chen',
-    role: 'Sports Club Manager',
-    image: 'https://randomuser.me/api/portraits/men/67.jpg',
+    name: 'Ankit Verma',
+    role: 'Fitness Enthusiast',
+    image: 'https://randomuser.me/api/portraits/men/15.jpg',
     rating: 4,
-    text: 'We use TurfTime for all our club bookings. The platform is intuitive and the variety of turfs available suits all our different needs.'
+    text: 'Great turfs and smooth booking experience. I love playing night matches here.'
   },
   {
-    name: 'Emma Thompson',
-    role: 'Casual Player',
-    image: 'https://randomuser.me/api/portraits/women/23.jpg',
+    name: 'Sneha Patel',
+    role: 'Amateur Goalkeeper',
+    image: 'https://randomuser.me/api/portraits/women/83.jpg',
     rating: 5,
-    text: 'I love how easy it is to find and book a turf for a casual game with friends. The prices are reasonable and the facilities are great!'
+    text: 'TurfTime is the best app for booking practice sessions. Highly recommended!'
   },
   {
-    name: 'Raj Patel',
-    role: 'Weekend Warrior',
-    image: 'https://randomuser.me/api/portraits/men/91.jpg',
+    name: 'Rohit Iyer',
+    role: 'Corporate Team Player',
+    image: 'https://randomuser.me/api/portraits/men/92.jpg',
+    rating: 5,
+    text: 'My colleagues and I book our Friday matches on TurfTime. Smooth interface and great support.'
+  },
+  {
+    name: 'Priya Nair',
+    role: 'Yoga Trainer',
+    image: 'https://randomuser.me/api/portraits/women/71.jpg',
     rating: 4,
-    text: 'TurfTime is my go-to app every weekend. Hassle-free and affordable!'
+    text: 'Clean facilities, on-time slot access, and friendly staff. Love it!'
   },
   {
-    name: 'Lina Gomez',
-    role: 'Coach',
-    image: 'https://randomuser.me/api/portraits/women/47.jpg',
+    name: 'Aman Joshi',
+    role: 'Local Team Captain',
+    image: 'https://randomuser.me/api/portraits/men/64.jpg',
     rating: 5,
-    text: 'Great platform for organizing coaching sessions and scrims. A+ facilities.'
+    text: 'I manage a local football team and TurfTime is my go-to for arranging matches.'
   },
   {
-    name: 'Amar Singh',
-    role: 'College Captain',
-    image: 'https://randomuser.me/api/portraits/men/36.jpg',
+    name: 'Neha Deshmukh',
+    role: 'School Coach',
+    image: 'https://randomuser.me/api/portraits/women/62.jpg',
     rating: 5,
-    text: 'I’ve booked over 20 matches through TurfTime. Never had a problem.'
+    text: 'We organize junior coaching sessions using TurfTime. Super convenient for school-level players.'
   },
   {
-    name: 'Anjali Mehta',
-    role: 'Fitness Buff',
-    image: 'https://randomuser.me/api/portraits/women/55.jpg',
+    name: 'Karan Malhotra',
+    role: 'Sports Blogger',
+    image: 'https://randomuser.me/api/portraits/men/55.jpg',
     rating: 5,
-    text: 'Clean, professional, and high-quality experience every single time.'
+    text: 'Writing about TurfTime was easy—they really deliver an elite experience. Highly impressed.'
   }
 ];
 
@@ -120,7 +127,7 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        {/* Desktop view - Grid */}
+        {/* Desktop Grid View */}
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -147,7 +154,7 @@ const Testimonials = () => {
           ))}
         </div>
 
-        {/* Mobile View - Carousel */}
+        {/* Mobile Carousel View */}
         <div className="md:hidden relative mt-10 h-[370px]">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
@@ -161,7 +168,11 @@ const Testimonials = () => {
             >
               <div className="flex items-center mb-4">
                 <div className="relative">
-                  <img src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} className="w-14 h-14 rounded-full object-cover" />
+                  <img
+                    src={testimonials[currentIndex].image}
+                    alt={testimonials[currentIndex].name}
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
                   <motion.div
                     className="absolute inset-0 rounded-full border-2 border-green-500 animate-pulse"
                     animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.8, 0.4] }}
@@ -175,14 +186,18 @@ const Testimonials = () => {
               </div>
               <div className="flex gap-1 mb-3">
                 {[...Array(5)].map((_, i) => (
-                  <StarIcon key={i} size={18} className={i < testimonials[currentIndex].rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'} />
+                  <StarIcon
+                    key={i}
+                    size={18}
+                    className={i < testimonials[currentIndex].rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'}
+                  />
                 ))}
               </div>
               <p className="text-gray-700 italic">"{testimonials[currentIndex].text}"</p>
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Buttons */}
+          {/* Carousel Navigation */}
           <div className="flex justify-center mt-6">
             <button onClick={prevSlide} className="mx-2 p-2 rounded-full bg-green-100 text-green-600 hover:bg-green-200">
               <ChevronLeftIcon size={20} />

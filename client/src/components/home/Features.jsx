@@ -8,7 +8,8 @@ import {
   TagIcon,
   UsersIcon,
   ChevronLeftIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
+  TrophyIcon // New icon
 } from 'lucide-react';
 
 const featuresList = [
@@ -51,6 +52,11 @@ const featuresList = [
     icon: <UsersIcon size={36} className="text-green-600" />,
     title: 'Community Events',
     description: 'Join local matches, tournaments, and social football meetups.'
+  },
+  {
+    icon: <TrophyIcon size={36} className="text-green-600" />,
+    title: 'Tournaments & Rewards',
+    description: 'Participate in tournaments and win exciting rewards and trophies.'
   }
 ];
 
@@ -85,7 +91,7 @@ const Features = () => {
           </p>
         </motion.div>
 
-        {/* Desktop Grid */}
+        {/* Desktop Grid View */}
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuresList.map((feature, index) => (
             <motion.div
@@ -96,9 +102,10 @@ const Features = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ scale: 1.03 }}
             >
-              <motion.div className="mb-4" whileHover={{ scale: 1.2 }}>
+              {/* Removed icon hover animation */}
+              <div className="mb-4">
                 {feature.icon}
-              </motion.div>
+              </div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </motion.div>
@@ -115,13 +122,9 @@ const Features = () => {
               transition={{ duration: 0.5 }}
               key={currentIndex}
             >
-              <motion.div
-                className="mb-4 flex justify-center"
-                animate={{ scale: [1, 1.1, 1], rotateZ: [0, 5, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
-              >
+              <div className="mb-4 flex justify-center">
                 {featuresList[currentIndex].icon}
-              </motion.div>
+              </div>
               <h3 className="text-xl font-semibold mb-2 text-center">
                 {featuresList[currentIndex].title}
               </h3>
@@ -145,7 +148,9 @@ const Features = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 mx-1 rounded-full ${currentIndex === index ? 'bg-green-600' : 'bg-gray-300'}`}
+                  className={`w-2 h-2 mx-1 rounded-full ${
+                    currentIndex === index ? 'bg-green-600' : 'bg-gray-300'
+                  }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}

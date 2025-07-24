@@ -45,7 +45,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <Hero />
-      <Features />
+     
 
       {/* Featured Turfs Section */}
       <section className="py-20 bg-white">
@@ -134,7 +134,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+ <Features />
       <Testimonials />
 
       {/* How It Works Section */}
