@@ -53,7 +53,7 @@ const Hero = () => {
 
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background */}
       <div className="absolute inset-0 z-0">
         <motion.div
           initial={{ scale: 1.1 }}
@@ -69,7 +69,7 @@ const Hero = () => {
         </motion.div>
         <div className="absolute inset-0 bg-black bg-opacity-60" />
 
-        {/* Floating Particles */}
+        {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <motion.div
@@ -94,15 +94,15 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 z-10 pt-20">
-        <div className="max-w-3xl">
+      {/* Content */}
+      <div className="container mx-auto px-4 lg:px-12 z-10 pt-20 pb-10">
+        <div className="max-w-3xl text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
               Book Your Perfect{' '}
               <motion.span
                 className="text-green-500 inline-block"
@@ -119,7 +119,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.p
-            className="text-lg md:text-xl text-gray-200 mb-8"
+            className="text-base sm:text-lg md:text-xl text-gray-200 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -129,7 +129,7 @@ const Hero = () => {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-4"
+            className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -151,9 +151,9 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Football Animation */}
+        {/* Ball - responsive & animated */}
         <motion.div
-          className="hidden lg:block absolute right-10 bottom-16 w-32 md:w-40 h-32 md:h-40"
+          className="hidden lg:block absolute right-10 bottom-16 w-28 sm:w-32 md:w-36 lg:w-40 h-28 sm:h-32 md:h-36 lg:h-40"
           style={{ x, y }}
           animate={controls}
         >
