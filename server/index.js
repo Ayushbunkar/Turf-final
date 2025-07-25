@@ -10,6 +10,8 @@ import authRoutes from './src/routes/authRoutes.js';
 import bookingRoutes from './src/routes/bookingRoutes.js'; // If exists
 import contactRoutes from './src/routes/contactRoutes.js'; // If exists
 import userRoutes from './src/routes/userRoutes.js'; 
+import turfRoutes from './src/routes/turfRoutes.js';
+
 
 dotenv.config();
 
@@ -39,6 +41,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/turfs', turfRoutes);
 
 // Default route
 app.get('/', (req, res) => {

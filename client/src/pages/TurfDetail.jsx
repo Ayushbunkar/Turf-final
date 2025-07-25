@@ -1,10 +1,57 @@
-import { motion } from 'framer-motion';
 import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+// Mock Turf Data (should come from API or context in real app)
+const turfData = [
+  {
+    id: 1,
+    name: 'Game ON',
+    location: 'Hoshangabad Road, Bhopal',
+    type: '5-a-side Turf',
+    price: 1000,
+    rating: 4.8,
+    image:
+      'https://images.unsplash.com/photo-1600250391125-075b0c4bcb78?auto=format&fit=crop&w=987&q=80',
+  },
+  {
+    id: 2,
+    name: 'Rush Arena',
+    location: 'Kolar Road, Bhopal',
+    type: '7-a-side Turf',
+    price: 1200,
+    rating: 4.6,
+    image:
+      'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=987&q=80',
+  },
+  {
+    id: 3,
+    name: 'Blaze Sports Club',
+    location: 'MP Nagar, Bhopal',
+    type: 'Futsal Arena',
+    price: 1500,
+    rating: 4.9,
+    image:
+      'https://images.unsplash.com/photo-1603052877333-dfa0d0d0f5b6?auto=format&fit=crop&w=987&q=80',
+  },
+];
 
 const TurfDetail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const turf = turfData.find((t) => t.id === parseInt(id));
+
+  if (!turf) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl text-gray-700">
+        Turf not found.
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen pt-20 bg-white">
-      {/* Header Section */}
+      {/* Hero Section */}
       <section className="py-16 bg-green-600">
         <div className="container mx-auto px-4">
           <motion.div
@@ -14,49 +61,63 @@ const TurfDetail = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Turf Details
+              {turf.name}
             </h1>
             <p className="text-xl text-green-100 max-w-2xl mx-auto">
-              View details and book this turf.
+              View turf details and book your slot today!
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Info Section */}
+      {/* Detail Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              Turf <span className="text-green-600">Information</span>
-            </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              This is a placeholder for the Turf Detail page. In a complete
-              implementation, this would include detailed information about a
-              specific turf, images, amenities, pricing, and booking options.
-            </p>
-          </div>
-
-          {/* Placeholder for images and details */}
           <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="bg-gray-100 rounded-lg h-64"></div>
-            <div className="space-y-4">
+            {/* Turf Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src={turf.image}
+                alt={turf.name}
+                className="w-full h-80 object-cover"
+              />
+            </motion.div>
+
+            {/* Turf Info */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="space-y-4"
+            >
+              <h2 className="text-3xl font-semibold text-gray-800">
+                {turf.name}
+              </h2>
               <p className="text-lg text-gray-700">
-                <strong>Location:</strong> Downtown Sports Complex
+                <strong>Location:</strong> {turf.location}
               </p>
               <p className="text-lg text-gray-700">
-                <strong>Type:</strong> 5-a-side Turf
+                <strong>Type:</strong> {turf.type}
               </p>
               <p className="text-lg text-gray-700">
-                <strong>Price:</strong> ₹1000/hour
+                <strong>Price:</strong> ₹{turf.price}/hour
               </p>
               <p className="text-lg text-gray-700">
-                <strong>Rating:</strong> 4.8 ⭐
+                <strong>Rating:</strong> {turf.rating} ⭐
               </p>
-              <button className="mt-4 bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700">
+
+              <button
+                onClick={() => navigate(`/booking/${turf.id}`)}
+                className="mt-4 bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition"
+              >
                 Book Now
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
