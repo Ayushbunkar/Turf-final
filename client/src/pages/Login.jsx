@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import Button from '../components/ui/Button.jsx';
+import { Button } from '../components/ui/Button.jsx';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });

@@ -5,7 +5,14 @@ import Testimonials from '../components/home/Testimonials';
 import CallToAction from '../components/home/CallToAction';
 import { motion } from 'framer-motion';
 import { CalendarIcon, MapIcon, ClockIcon } from 'lucide-react';
-import Card from '../components/ui/Card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '../components/ui/Card';
 import { Link } from 'react-router-dom';
 
 const featuredTurfs = [

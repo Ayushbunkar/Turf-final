@@ -1,27 +1,41 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-const Card = ({
-  children,
-  className = '',
-  onClick,
-  hoverEffect = true,
-  clickEffect = false,
-  glowEffect = false,
-}) => {
-  const baseClasses = `bg-white rounded-xl overflow-hidden transition-shadow duration-300 ${hoverEffect ? 'hover:shadow-2xl' : ''} ${glowEffect ? 'hover:ring-2 hover:ring-green-400 hover:ring-offset-2' : ''} ${className}`;
+const Card = React.forwardRef(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("rounded-lg border bg-card text-card-foreground shadow-sm", className)} {...props} />
+));
+Card.displayName = "Card";
 
-  return (
-    <motion.div
-      className={baseClasses}
-      onClick={onClick}
-      whileHover={hoverEffect ? { scale: 1.03 } : {}}
-      whileTap={clickEffect ? { scale: 0.97 } : {}}
-      transition={{ duration: 0.2 }}
-    >
-      {children}
-    </motion.div>
-  );
+const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("flex flex-col space-y-1.5 p-6", className)} {...props} />
+));
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
+  <h3 ref={ref} className={cn("text-2xl font-semibold leading-none tracking-tight", className)} {...props} />
+));
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
+  <p ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+));
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+));
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("flex items-center p-6 pt-0", className)} {...props} />
+));
+CardFooter.displayName = "CardFooter";
+
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
 };
-
-export default Card;

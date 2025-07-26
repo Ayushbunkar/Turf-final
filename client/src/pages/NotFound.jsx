@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Button from '../components/ui/Button.jsx';
+import { Button } from '../components/ui/Button.jsx';
 import { HomeIcon } from 'lucide-react';
 
 const NotFound = () => {

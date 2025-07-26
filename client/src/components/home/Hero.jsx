@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useAnimation } from 'framer-motion';
 import { ArrowRightIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Button from '../ui/Button.jsx';
+import { Button } from "../ui/Button";
 import footballImg from '../../assets/football.png';
 
 const Hero = () => {
