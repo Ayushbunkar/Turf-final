@@ -1,16 +1,17 @@
 // src/pages/TurfsPage.jsx
-"use client"
+
+import React from "react";
 
 import { useState } from "react"
 import { Button } from "../components/ui/Button.jsx"
- import { Card } from "../components/ui/Card.jsx"
+import { Card } from "../components/ui/Card.jsx"
 import { MapPin, Search, RotateCcw } from "lucide-react"
 
 import TopNavigation from "../components/Navigation/TopNavigation"
 import SearchBar from "../components/Search/SearchBar"
 import AdvancedFilters from "../components/Filters/AdvancedFilters.jsx"
 import ReferralPanel from "../components/ReferralPanel.jsx"
-import TurfCard from "../components/TurfCard.jsx"
+import TurfCard from "../components/TurfCard/TurfCard.jsx"
 import ChatWidget from "../components/ChatWidget.jsx"
 import NotificationPanel from "../components/NotificationPanel.jsx"
 import FloatingActionButtons from "../components/FloatingActionButtons.jsx"
@@ -23,6 +24,7 @@ import {
   getDirections,
   calculateCartTotal,
 } from "../utils/turfUtils"
+import { getDistanceFromGoogleMaps } from "../utils/googleMapsUtils.js"
 
 import {
   defaultNotifications,
@@ -48,6 +50,7 @@ const defaultCenter = {
 
 export default function TurfsPage() {
   const [turfs, setTurfs] = useState(mockTurfs)
+  const [distances, setDistances] = useState({})
   const [selectedTurf, setSelectedTurf] = useState(null)
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [viewMode, setViewMode] = useState("grid")
@@ -65,6 +68,22 @@ export default function TurfsPage() {
   const [showReferral, setShowReferral] = useState(false)
 
   const userLocation = useUserLocation()
+
+  // Fetch real-time distances when turfs or userLocation change
+  React.useEffect(() => {
+    async function fetchDistances() {
+      if (!userLocation || !turfs.length) return;
+      const newDistances = {};
+      for (const turf of turfs) {
+        if (turf.location) {
+          const distance = await getDistanceFromGoogleMaps(userLocation, turf.location);
+          newDistances[turf.id] = distance;
+        }
+      }
+      setDistances(newDistances);
+    }
+    fetchDistances();
+  }, [userLocation, turfs]);
   const {
     filters,
     setFilters,
@@ -117,26 +136,27 @@ export default function TurfsPage() {
   const cartTotal = calculateCartTotal(cart)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br pt-20 from-green-50 via-blue-50 to-purple-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br pt-20 from-green-50 via-green-100 to-green-200 relative overflow-hidden">
       {/* Background Animation */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-400/20 to-blue-400/20 rounded-full animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/20 to-pink-400/20 rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-yellow-400/10 to-orange-400/10 rounded-full animate-spin" style={{ animationDuration: "20s" }} />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-300/30 rounded-full animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-green-500/20 rounded-full animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-100/20 rounded-full animate-spin" style={{ animationDuration: "20s" }} />
       </div>
 
       <div className="relative z-10 p-4 max-w-7xl mx-auto">
         {/* Hero */}
-        <div className="mb-8 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            Find Your Perfect Turf
+        <div className="mb-12 text-center bg-gradient-to-r from-green-700 via-green-600 to-green-500 p-8 rounded-2xl shadow-lg animate-fade-in-up">
+          <h1 className="text-5xl font-extrabold tracking-tight text-white mb-4 animate-fade-in">
+            Unlock Your Game Zone
           </h1>
-          <p className="text-xl text-gray-600">Book premium sports facilities with advanced features</p>
-
-          <div className="flex justify-center space-x-8 mt-6">
-            <Stats count={turfs.length} label="Premium Turfs" color="green" />
-            <Stats count="24/7" label="Support" color="blue" />
-            <Stats count="1000+" label="Happy Players" color="purple" />
+          <p className="text-lg md:text-xl text-white/80 animate-fade-in delay-100">
+            Explore & book top-notch turf arenas with ease and flair.
+          </p>
+          <div className="flex justify-center space-x-8 mt-6 animate-fade-in delay-200">
+            <Stats count={turfs.length} label="Turfs Available" color="white" />
+            <Stats count="24/7" label="Customer Support" color="white" />
+            <Stats count="1.2K+" label="Players Joined" color="white" />
           </div>
         </div>
 
@@ -182,6 +202,7 @@ export default function TurfsPage() {
               getDirections={(t) => getDirections(t, userLocation)}
               setSelectedTurf={setSelectedTurf}
               onBookSlot={handleBookSlot}
+              distance={distances[turf.id]}
             />
           ))}
         </div>
@@ -213,7 +234,7 @@ export default function TurfsPage() {
 // Stats component
 const Stats = ({ count, label, color }) => (
   <div className="text-center">
-    <div className={`text-2xl font-bold text-${color}-600`}>{count}</div>
-    <div className="text-sm text-gray-500">{label}</div>
+    <div className={`text-2xl font-bold text-${color}-400 animate-fade-in`}>{count}</div>
+    <div className="text-sm text-white/70 animate-fade-in delay-100">{label}</div>
   </div>
 )

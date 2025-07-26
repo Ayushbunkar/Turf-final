@@ -11,6 +11,7 @@ import bookingRoutes from './src/routes/bookingRoutes.js'; // If exists
 import contactRoutes from './src/routes/contactRoutes.js'; // If exists
 import userRoutes from './src/routes/userRoutes.js'; 
 import turfRoutes from './src/routes/turfRoutes.js';
+import mapsRoutes from './src/routes/mapsRoutes.js';
 
 
 dotenv.config();
@@ -42,6 +43,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/turfs', turfRoutes);
+app.use('/api/maps', mapsRoutes);
 
 // Default route
 app.get('/', (req, res) => {

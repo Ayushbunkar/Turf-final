@@ -1,7 +1,7 @@
 // /server/routes/turfRoutes.js
 import express from 'express';
 const router = express.Router();
-import Turf from '../models/turfModel.js'; // your turf schema
+import Turf from '../models/Turf.js'; // your turf schema
 
 router.get('/', async (req, res) => {
   try {

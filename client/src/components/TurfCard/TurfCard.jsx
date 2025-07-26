@@ -4,17 +4,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { MapPin, Star, Navigation, Eye, Heart, Share2, Shield, Users, Clock, Trophy, Percent } from "lucide-react"
+import {
+  MapPin, Star, Navigation, Eye, Heart, Share2, Shield,
+  Users, Clock, Trophy, Percent
+} from "lucide-react"
 import { getAvailableSlotsCount } from "../../utils/turfUtils"
 import { weatherIcons } from "../../constants/appConstants"
 import TurfDetailsModal from "../Modals/TurfDetailsModal"
 
-const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDirections, setSelectedTurf }) => {
+const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDirections, setSelectedTurf, distance }) => {
   const WeatherIcon = weatherIcons[turf?.weather?.condition] || weatherIcons.sunny
 
   return (
     <Card
-      className={`overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-2 border-gray-100 hover:border-blue-200 group ${
+      className={`overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-2 border-gray-100 hover:border-green-300 group ${
         viewMode === "list" ? "flex" : ""
       }`}
     >
@@ -31,7 +34,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
         {/* Overlay badges */}
         <div className="absolute top-3 left-3 flex flex-col space-y-2">
           <Badge className="bg-green-500/90 backdrop-blur-sm text-white animate-pulse">
-            {turf.distance || 0}km away
+            {distance ? distance : "Calculating..."}
           </Badge>
           {turf.loyaltyPoints && (
             <Badge className="bg-yellow-500/90 backdrop-blur-sm text-white">+{turf.loyaltyPoints} pts</Badge>
@@ -69,7 +72,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
         {turf.weather && (
           <div className="absolute bottom-3 left-3">
             <div className="bg-white/90 backdrop-blur-sm rounded-full p-2 flex items-center space-x-1">
-              <WeatherIcon className="h-4 w-4 text-blue-600" />
+              <WeatherIcon className="h-4 w-4 text-green-600" />
               <span className="text-xs font-medium">{turf.weather.temperature}°C</span>
             </div>
           </div>
@@ -80,7 +83,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
         <CardHeader className="pb-3">
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <CardTitle className="text-xl group-hover:text-blue-600 transition-colors duration-300 flex items-center">
+              <CardTitle className="text-xl group-hover:text-green-600 transition-colors duration-300 flex items-center">
                 {turf.name || "Unknown Turf"}
                 {turf.weatherDependent === false && (
                   <Shield className="h-4 w-4 ml-2 text-green-500" title="Weather Independent" />
@@ -96,16 +99,14 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
                   <span className="ml-1 text-sm font-medium">{turf.rating || 0}</span>
                   <span className="ml-1 text-sm text-gray-500">({turf.reviews || 0})</span>
                 </div>
-                <Badge variant="outline" className="text-xs">
-                  {turf.surface || "Unknown"}
-                </Badge>
+                <Badge variant="outline" className="text-xs">{turf.surface || "Unknown"}</Badge>
               </div>
             </div>
             <div className="text-right ml-4">
               <div className="text-2xl font-bold text-green-600">₹{turf.price || 0}</div>
               <div className="text-sm text-gray-500">per hour</div>
               {Array.isArray(turf.groupDiscounts) && turf.groupDiscounts.length > 0 && (
-                <Badge className="mt-1 bg-orange-100 text-orange-800 text-xs">
+                <Badge className="mt-1 bg-green-100 text-green-800 text-xs">
                   <Percent className="h-3 w-3 mr-1" />
                   Group discounts
                 </Badge>
@@ -123,7 +124,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
                   <Badge
                     key={amenity}
                     variant="secondary"
-                    className="text-xs bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors duration-300"
+                    className="text-xs bg-green-50 text-green-700 hover:bg-green-100 transition-colors duration-300"
                   >
                     {amenity}
                   </Badge>
@@ -137,17 +138,17 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
 
             {/* Quick stats */}
             <div className="grid grid-cols-3 gap-4 text-center">
-              <div className="bg-gray-50 rounded-lg p-2">
-                <Users className="h-4 w-4 mx-auto text-blue-600 mb-1" />
+              <div className="bg-green-50 rounded-lg p-2">
+                <Users className="h-4 w-4 mx-auto text-green-600 mb-1" />
                 <div className="text-xs text-gray-600">Capacity</div>
                 <div className="text-sm font-semibold">{turf.capacity || 0}</div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-2">
+              <div className="bg-green-50 rounded-lg p-2">
                 <Clock className="h-4 w-4 mx-auto text-green-600 mb-1" />
                 <div className="text-xs text-gray-600">Available</div>
                 <div className="text-sm font-semibold">{getAvailableSlotsCount(turf.timeSlots)} slots</div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-2">
+              <div className="bg-green-50 rounded-lg p-2">
                 <Trophy className="h-4 w-4 mx-auto text-yellow-600 mb-1" />
                 <div className="text-xs text-gray-600">Since</div>
                 <div className="text-sm font-semibold">{turf.established || "N/A"}</div>
@@ -160,7 +161,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
                 variant="outline"
                 size="sm"
                 onClick={() => getDirections(turf)}
-                className="flex-1 rounded-xl hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 hover:scale-105"
+                className="flex-1 rounded-xl hover:bg-green-50 hover:border-green-300 transition-all duration-300 hover:scale-105"
               >
                 <Navigation className="h-4 w-4 mr-2" />
                 Directions
@@ -169,7 +170,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
-                    className="flex-1 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="flex-1 rounded-xl bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                     onClick={() => setSelectedTurf(turf)}
                   >
                     <Eye className="h-4 w-4 mr-2" />
