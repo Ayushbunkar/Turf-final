@@ -3,7 +3,7 @@
 
 import { useState } from "react"
 import { Button } from "../components/ui/Button.jsx"
-import { Card } from "../components/ui/Card.jsx"
+ import { Card } from "../components/ui/Card.jsx"
 import { MapPin, Search, RotateCcw } from "lucide-react"
 
 import TopNavigation from "../components/Navigation/TopNavigation"
@@ -25,11 +25,26 @@ import {
 } from "../utils/turfUtils"
 
 import {
-  defaultUserProfile,
   defaultNotifications,
 } from "../constants/appConstants"
 
 import mockTurfs from "../constants/mockTurfs.js"
+
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+} from "@react-google-maps/api"
+
+const mapContainerStyle = {
+  width: "100%",
+  height: "100%",
+}
+
+const defaultCenter = {
+  lat: 19.076,
+  lng: 72.8777,
+}
 
 export default function TurfsPage() {
   const [turfs, setTurfs] = useState(mockTurfs)
@@ -40,7 +55,10 @@ export default function TurfsPage() {
   const [showChat, setShowChat] = useState(false)
   const [favorites, setFavorites] = useState([])
   const [cart, setCart] = useState([])
-  const [userProfile] = useState(defaultUserProfile)
+  const [userProfile, setUserProfile] = useState(() => {
+    const storedUser = localStorage.getItem("user")
+    return storedUser ? JSON.parse(storedUser) : { name: "Guest" }
+  })
   const [notifications, setNotifications] = useState(defaultNotifications)
   const [showNotifications, setShowNotifications] = useState(false)
   const [referralCode, setReferralCode] = useState("")
@@ -55,6 +73,10 @@ export default function TurfsPage() {
     filteredTurfs,
     resetFilters,
   } = useFilters(turfs)
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+  })
 
   const handleBookSlot = (turfId, slot) => {
     const turf = turfs.find((t) => t.id === turfId)
@@ -127,29 +149,22 @@ export default function TurfsPage() {
         {/* Map Mode */}
         {viewMode === "map" && (
           <Card className="mb-8 p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl">
-            <div className="h-96 bg-gradient-to-br from-blue-100 to-green-100 rounded-xl flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-blue-200/50 to-green-200/50" />
-              <div className="relative z-10 text-center">
-                <MapPin className="h-16 w-16 text-blue-600 mx-auto mb-4 animate-bounce" />
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Interactive Map View</h3>
-                <p className="text-gray-600 mb-4">Google Maps integration would be implemented here</p>
-                <div className="flex justify-center space-x-4">
-                  {filteredTurfs.slice(0, 3).map((turf, index) => (
-                    <div
+            <div className="h-96 rounded-xl overflow-hidden relative z-10">
+              {isLoaded && (
+                <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  center={userLocation || defaultCenter}
+                  zoom={13}
+                >
+                  {filteredTurfs.map((turf) => (
+                    <Marker
                       key={turf.id}
-                      className="bg-white p-3 rounded-lg shadow-md cursor-pointer hover:shadow-lg hover:scale-105 transition"
-                      style={{ position: "absolute", left: `${20 + index * 15}%`, top: `${30 + index * 10}%` }}
+                      position={{ lat: turf.location.lat, lng: turf.location.lng }}
                       onClick={() => setSelectedTurf(turf)}
-                    >
-                      <div className="text-sm font-semibold">{turf.name}</div>
-                      <div className="text-xs text-gray-500">₹{turf.price}/hr</div>
-                      <div className="flex items-center text-xs">
-                        <div className="h-3 w-3 bg-yellow-400 rounded-full mr-1" />{turf.rating}
-                      </div>
-                    </div>
+                    />
                   ))}
-                </div>
-              </div>
+                </GoogleMap>
+              )}
             </div>
           </Card>
         )}

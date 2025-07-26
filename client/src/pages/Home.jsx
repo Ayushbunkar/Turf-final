@@ -12,7 +12,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from '../components/ui/Card';
+} from '../components/ui/Card.jsx';
 import { Link } from 'react-router-dom';
 
 const featuredTurfs = [
