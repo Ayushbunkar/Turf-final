@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
   res.send('🌟 API is running...');
 });
 
-// Change port from 4500 to 4501 to avoid EADDRINUSE error
+
 const PORT = process.env.PORT || 4500;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
