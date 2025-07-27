@@ -30,7 +30,7 @@ const ReferralPanel = ({ showReferral, referralCode, setReferralCode }) => {
           <Button
             variant="outline"
             size="sm"
-            className="mt-2 rounded-full bg-transparent"
+            className="mt-10 rounded-full bg-transparent"
             onClick={() => navigator.clipboard.writeText("JOHN2024")}
           >
             <Copy className="h-4 w-4 mr-2" />

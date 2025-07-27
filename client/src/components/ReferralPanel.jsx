@@ -8,7 +8,7 @@ const ReferralPanel = () => {
       <input
         type="email"
         placeholder="Friend's email"
-        className="w-full px-3 py-2 border border-gray-300 rounded mb-2"
+        className="w-full px-3 py-2 border border-green-500 focus:border-green-600 active:border-green-600 rounded mb-2"
       />
       <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">
         Send Invite

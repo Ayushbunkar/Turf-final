@@ -17,7 +17,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
 
   return (
     <Card
-      className={`overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-2 border-gray-100 hover:border-green-300 group ${
+      className={`overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-2 border-green-500 hover:border-green-600 group ${
         viewMode === "list" ? "flex" : ""
       }`}
     >
@@ -156,12 +156,12 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
             </div>
 
             {/* Action buttons */}
-            <div className="flex space-x-2">
+            <div className="flex justify-between items-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => getDirections(turf)}
-                className="flex-1 rounded-xl hover:bg-green-50 hover:border-green-300 transition-all duration-300 hover:scale-105"
+                className="rounded-xl hover:bg-green-50 hover:border-green-600 focus:border-green-600 active:border-green-600 transition-all duration-300 hover:scale-105 border-green-500"
               >
                 <Navigation className="h-4 w-4 mr-2" />
                 Directions
@@ -170,7 +170,7 @@ const TurfCard = ({ turf, viewMode, favorites, toggleFavorite, shareTurf, getDir
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
-                    className="flex-1 rounded-xl bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="rounded-xl bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 transition-all duration-300 hover:scale-105 hover:shadow-lg ml-auto"
                     onClick={() => setSelectedTurf(turf)}
                   >
                     <Eye className="h-4 w-4 mr-2" />

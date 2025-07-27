@@ -24,19 +24,29 @@ const SearchBar = ({
     <div className="mb-8 space-y-4">
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1 relative group">
-          <Search className="absolute left-4 top-4 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute left-2 top-2 h-10 w-10 rounded-full hover:bg-green-100 text-green-700 z-10"
+            aria-label="Search"
+            tabIndex={0}
+            style={{ pointerEvents: 'none' }}
+          >
+            <Search className="h-5 w-5" />
+          </Button>
           <Input
             placeholder="Search turfs by name, location, or amenities..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-12 h-14 text-lg border-2 border-gray-200 focus:border-blue-500 rounded-2xl bg-white/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg focus:shadow-xl"
+            className="pl-12 pr-12 h-14 text-lg border border-green-500 focus:border-green-600 active:border-green-600 rounded-2xl bg-green-50/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg focus:shadow-xl text-green-900"
           />
           {searchQuery && (
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-2 top-2 h-10 w-10 rounded-full hover:bg-gray-100"
+              className="absolute right-2 top-2 h-10 w-10 rounded-full hover:bg-green-100 text-green-700"
               onClick={() => setSearchQuery("")}
+              aria-label="Clear search"
             >
               <X className="h-4 w-4" />
             </Button>
@@ -46,45 +56,55 @@ const SearchBar = ({
         <Button
           variant="outline"
           onClick={() => setShowFilters(!showFilters)}
-          className="h-14 px-8 border-2 border-gray-200 hover:border-blue-500 rounded-2xl bg-white/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg group"
+          className="h-14 px-8 border border-green-500 focus:border-green-600 active:border-green-600 rounded-2xl bg-green-50/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg group text-green-900"
         >
-          <Filter className="h-5 w-5 mr-2 group-hover:rotate-180 transition-transform duration-300" />
+          <Filter className="h-5 w-5 mr-2 group-hover:rotate-180 transition-transform duration-300 text-green-700" />
           Advanced Filters
-          {activeFiltersCount > 0 && <Badge className="ml-2 bg-blue-500 animate-pulse">{activeFiltersCount}</Badge>}
+          {activeFiltersCount > 0 && (
+            <Badge className="ml-2 bg-green-600 animate-pulse text-white">
+              {activeFiltersCount}
+            </Badge>
+          )}
         </Button>
 
         <Button
           variant="outline"
           onClick={() => setShowReferral(!showReferral)}
-          className="h-14 px-6 border-2 border-green-200 hover:border-green-500 rounded-2xl bg-gradient-to-r from-green-50 to-emerald-50 transition-all duration-300 hover:shadow-lg"
+          className="h-14 px-6 border border-green-500 focus:border-green-600 active:border-green-600 rounded-2xl bg-gradient-to-r from-green-100 to-emerald-100 transition-all duration-300 hover:shadow-lg text-green-900"
         >
-          <Gift className="h-5 w-5 mr-2" />
+          <Gift className="h-5 w-5 mr-2 text-green-700" />
           Refer & Earn
         </Button>
       </div>
 
       {/* Quick Filters */}
       <div className="flex flex-wrap gap-2">
-        {["Available Now", "Under ₹1000", "5★ Rated", "Natural Grass", "With Parking"].map((filter, index) => (
-          <Button
-            key={filter}
-            variant="outline"
-            size="sm"
-            className="rounded-full bg-white/60 backdrop-blur-sm hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 hover:scale-105"
-          >
-            {filter}
-          </Button>
-        ))}
+        {["Available Now", "Under ₹1000", "5★ Rated", "Natural Grass", "With Parking"].map(
+          (filter, index) => (
+            <Button
+              key={filter}
+              variant="outline"
+              size="sm"
+            className="rounded-full bg-green-50/60 backdrop-blur-sm hover:bg-green-100 hover:border-green-600 focus:border-green-600 active:border-green-600 transition-all duration-300 hover:scale-105 text-green-700 border-green-500"
+            >
+              {filter}
+            </Button>
+          )
+        )}
       </div>
 
       {/* Results count */}
       {showFilters && (
         <div className="flex justify-between items-center">
-          <Button variant="outline" onClick={resetFilters} className="rounded-xl bg-transparent">
+          <Button
+            variant="outline"
+            onClick={resetFilters}
+            className="rounded-xl bg-green-50 border-2 border-green-500 text-green-700"
+          >
             <RotateCcw className="h-4 w-4 mr-2" />
             Reset Filters
           </Button>
-          <div className="text-sm text-gray-600">
+          <div className="text-sm  text-green-700">
             Showing {filteredTurfs.length} of {totalTurfs} turfs
           </div>
         </div>
@@ -94,3 +114,4 @@ const SearchBar = ({
 }
 
 export default SearchBar
+ 

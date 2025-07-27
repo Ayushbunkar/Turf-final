@@ -14,26 +14,26 @@ const TopNavigation = ({
   setShowNotifications,
 }) => {
   return (
-    <div className="mb-6 flex justify-between items-center bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
+    <div className="mb-6 flex justify-between items-center bg-green-50/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
       <div className="flex items-center space-x-4">
         <Button
           variant={viewMode === "grid" ? "default" : "outline"}
           size="sm"
           onClick={() => setViewMode("grid")}
-          className="transition-all duration-300 hover:scale-105"
+          className={`transition-all duration-300 hover:scale-105 border-2 border-green-600 ${viewMode === "grid" ? "bg-green-600 text-white" : "bg-green-100 text-green-800"}`}
         >
           <div className="grid grid-cols-2 gap-1 w-4 h-4">
-            <div className="bg-current rounded-sm"></div>
-            <div className="bg-current rounded-sm"></div>
-            <div className="bg-current rounded-sm"></div>
-            <div className="bg-current rounded-sm"></div>
+            <div className="bg-green-700 rounded-sm"></div>
+            <div className="bg-green-700 rounded-sm"></div>
+            <div className="bg-green-700 rounded-sm"></div>
+            <div className="bg-green-700 rounded-sm"></div>
           </div>
         </Button>
         <Button
           variant={viewMode === "list" ? "default" : "outline"}
           size="sm"
           onClick={() => setViewMode("list")}
-          className="transition-all duration-300 hover:scale-105"
+          className={`transition-all duration-300 hover:scale-105 border-2 border-green-600 ${viewMode === "list" ? "bg-green-600 text-white" : "bg-green-100 text-green-800"}`}
         >
           <Menu className="h-4 w-4" />
         </Button>
@@ -41,7 +41,7 @@ const TopNavigation = ({
           variant={viewMode === "map" ? "default" : "outline"}
           size="sm"
           onClick={() => setViewMode("map")}
-          className="transition-all duration-300 hover:scale-105"
+          className={`transition-all duration-300 hover:scale-105 border-2 border-green-600 ${viewMode === "map" ? "bg-green-600 text-white" : "bg-green-100 text-green-800"}`}
         >
           <MapPin className="h-4 w-4" />
         </Button>
@@ -50,15 +50,15 @@ const TopNavigation = ({
       <div className="flex items-center space-x-4">
         {/* Loyalty Points */}
         <div className="flex items-center space-x-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-2 rounded-full">
-          <Award className="h-4 w-4" />
-          <span className="font-semibold">{userProfile.loyaltyPoints} pts</span>
+          <Award className="h-4 w-4 text-green-700" />
+          <span className="font-semibold text-green-700">{userProfile.loyaltyPoints} pts</span>
         </div>
 
         {/* Cart */}
         <Button
           variant="outline"
           size="sm"
-          className="relative transition-all duration-300 hover:scale-105 bg-transparent"
+          className="relative transition-all duration-300 hover:scale-105 bg-green-100 border-2 border-green-600 text-green-700"
         >
           <ShoppingCart className="h-4 w-4" />
           {cart.length > 0 && (
@@ -72,7 +72,7 @@ const TopNavigation = ({
         <Button
           variant="outline"
           size="sm"
-          className="relative transition-all duration-300 hover:scale-105 bg-transparent"
+          className="relative transition-all duration-300 hover:scale-105 bg-green-100 border-2 border-green-600 text-green-700"
           onClick={() => setShowNotifications(!showNotifications)}
         >
           <Bell className="h-4 w-4" />
@@ -85,12 +85,12 @@ const TopNavigation = ({
 
         {/* Profile */}
         <div className="flex items-center space-x-2 bg-white rounded-full p-2 shadow-md">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold">
+          <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-700 rounded-full flex items-center justify-center text-white font-semibold border-2 border-green-600">
             {userProfile.name.charAt(0)}
           </div>
           <div className="hidden md:block">
-            <div className="text-sm font-semibold">{userProfile.name}</div>
-            <div className="text-xs text-gray-500">{userProfile.membershipTier}</div>
+            <div className="text-sm font-semibold text-green-700">{userProfile.name}</div>
+            <div className="text-xs text-green-600">{userProfile.membershipTier}</div>
           </div>
         </div>
       </div>

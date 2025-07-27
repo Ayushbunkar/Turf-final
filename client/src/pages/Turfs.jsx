@@ -168,7 +168,7 @@ export default function TurfsPage() {
 
         {/* Navigation + Search */}
         <TopNavigation {...{ viewMode, setViewMode, userProfile, cart, notifications, showNotifications, setShowNotifications }} />
-        <div className="border-2 border-green-500 rounded-md mb-4">
+        <div className="">
           <SearchBar {...{ searchQuery, setSearchQuery, filters, showFilters, setShowFilters, resetFilters, showReferral, setShowReferral, filteredTurfs, totalTurfs: turfs.length }} />
         </div>
         <AdvancedFilters {...{ filters, setFilters, showFilters }} />
