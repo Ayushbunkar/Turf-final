@@ -9,33 +9,33 @@ const AdvancedFilters = ({ filters, setFilters, showFilters }) => {
   if (!showFilters) return null
 
   return (
-    <Card className="p-6 bg-white/90 backdrop-blur-sm border-2 border-gray-100 rounded-2xl shadow-xl">
+    <Card className="p-6 bg-green-50/90 backdrop-blur-sm border-2 border-green-600 rounded-2xl shadow-xl">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="space-y-3">
           <label className="text-sm font-semibold text-gray-700 flex items-center">
-            <Navigation className="h-4 w-4 mr-2" />
-            Distance Range
+            <Navigation className="h-4 w-4 mr-2 text-green-700" />
+            <span className="text-green-800">Distance Range</span>
           </label>
           <Select
             value={filters.distance[0].toString()}
             onValueChange={(value) => setFilters((prev) => ({ ...prev, distance: [Number.parseInt(value)] }))}
           >
             <SelectTrigger className="rounded-xl">
-              <SelectValue />
-            </SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
             <SelectContent>
-              <SelectItem value="5">Within 5km</SelectItem>
-              <SelectItem value="10">Within 10km</SelectItem>
-              <SelectItem value="20">Within 20km</SelectItem>
-              <SelectItem value="50">Within 50km</SelectItem>
+              <SelectItem value="5" className="text-green-700">Within 5km</SelectItem>
+              <SelectItem value="10" className="text-green-700">Within 10km</SelectItem>
+              <SelectItem value="20" className="text-green-700">Within 20km</SelectItem>
+              <SelectItem value="50" className="text-green-700">Within 50km</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div className="space-y-3">
           <label className="text-sm font-semibold text-gray-700 flex items-center">
-            <DollarSign className="h-4 w-4 mr-2" />
-            Price Range
+            <DollarSign className="h-4 w-4 mr-2 text-green-700" />
+            <span className="text-green-800">Price Range</span>
           </label>
           <div className="px-2">
             <Slider
@@ -44,19 +44,19 @@ const AdvancedFilters = ({ filters, setFilters, showFilters }) => {
               max={2500}
               min={0}
               step={100}
-              className="w-full"
+              className="w-full border-2 border-green-600 rounded-lg bg-green-100"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-2">
-              <span>₹{filters.priceRange[0]}</span>
-              <span>₹{filters.priceRange[1]}</span>
+              <span className="text-green-700">₹{filters.priceRange[0]}</span>
+              <span className="text-green-700">₹{filters.priceRange[1]}</span>
             </div>
           </div>
         </div>
 
         <div className="space-y-3">
           <label className="text-sm font-semibold text-gray-700 flex items-center">
-            <Star className="h-4 w-4 mr-2" />
-            Minimum Rating
+            <Star className="h-4 w-4 mr-2 text-green-700" />
+            <span className="text-green-800">Minimum Rating</span>
           </label>
           <div className="px-2">
             <Slider
@@ -65,32 +65,32 @@ const AdvancedFilters = ({ filters, setFilters, showFilters }) => {
               max={5}
               min={0}
               step={0.5}
-              className="w-full"
+              className="w-full border-2 border-green-600 rounded-lg bg-green-100"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-2">
-              <span>{filters.rating[0]}★</span>
-              <span>5★</span>
+              <span className="text-green-700">{filters.rating[0]}★</span>
+              <span className="text-green-700">5★</span>
             </div>
           </div>
         </div>
 
         <div className="space-y-3">
           <label className="text-sm font-semibold text-gray-700 flex items-center">
-            <Activity className="h-4 w-4 mr-2" />
-            Surface Type
+            <Activity className="h-4 w-4 mr-2 text-green-700" />
+            <span className="text-green-800">Surface Type</span>
           </label>
           <Select
             value={filters.surface}
             onValueChange={(value) => setFilters((prev) => ({ ...prev, surface: value }))}
           >
             <SelectTrigger className="rounded-xl">
-              <SelectValue />
-            </SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Surfaces</SelectItem>
-              <SelectItem value="artificial grass">Artificial Grass</SelectItem>
-              <SelectItem value="natural grass">Natural Grass</SelectItem>
-              <SelectItem value="hybrid grass">Hybrid Grass</SelectItem>
+              <SelectItem value="all" className="text-green-700">All Surfaces</SelectItem>
+              <SelectItem value="artificial grass" className="text-green-700">Artificial Grass</SelectItem>
+              <SelectItem value="natural grass" className="text-green-700">Natural Grass</SelectItem>
+              <SelectItem value="hybrid grass" className="text-green-700">Hybrid Grass</SelectItem>
             </SelectContent>
           </Select>
         </div>

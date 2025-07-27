@@ -75,9 +75,15 @@ export default function TurfsPage() {
       if (!userLocation || !turfs.length) return;
       const newDistances = {};
       for (const turf of turfs) {
-        if (turf.location) {
+        if (
+          turf.location &&
+          typeof turf.location.lat === "number" &&
+          typeof turf.location.lng === "number"
+        ) {
           const distance = await getDistanceFromGoogleMaps(userLocation, turf.location);
           newDistances[turf.id] = distance;
+        } else {
+          newDistances[turf.id] = null;
         }
       }
       setDistances(newDistances);
@@ -146,7 +152,7 @@ export default function TurfsPage() {
 
       <div className="relative z-10 p-4 max-w-7xl mx-auto">
         {/* Hero */}
-        <div className="mb-12 text-center bg-gradient-to-r from-green-700 via-green-600 to-green-500 p-8 rounded-2xl shadow-lg animate-fade-in-up">
+        <div className="mb-12 text-center bg-gradient-to-r from-green-700 via-green-600 to-green-500 p-8 rounded-2xl shadow-lg border-4 border-green-600 animate-fade-in-up">
           <h1 className="text-5xl font-extrabold tracking-tight text-white mb-4 animate-fade-in">
             Unlock Your Game Zone
           </h1>
@@ -162,13 +168,15 @@ export default function TurfsPage() {
 
         {/* Navigation + Search */}
         <TopNavigation {...{ viewMode, setViewMode, userProfile, cart, notifications, showNotifications, setShowNotifications }} />
-        <SearchBar {...{ searchQuery, setSearchQuery, filters, showFilters, setShowFilters, resetFilters, showReferral, setShowReferral, filteredTurfs, totalTurfs: turfs.length }} />
+        <div className="border-2 border-green-500 rounded-md mb-4">
+          <SearchBar {...{ searchQuery, setSearchQuery, filters, showFilters, setShowFilters, resetFilters, showReferral, setShowReferral, filteredTurfs, totalTurfs: turfs.length }} />
+        </div>
         <AdvancedFilters {...{ filters, setFilters, showFilters }} />
         <ReferralPanel {...{ showReferral, referralCode, setReferralCode }} />
 
         {/* Map Mode */}
         {viewMode === "map" && (
-          <Card className="mb-8 p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl">
+          <Card className="mb-8 p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border-4 border-green-500">
             <div className="h-96 rounded-xl overflow-hidden relative z-10">
               {isLoaded && (
                 <GoogleMap
@@ -189,7 +197,7 @@ export default function TurfsPage() {
           </Card>
         )}
 
-        {/* Turf Cards */}
+        
         <div className={viewMode === "list" ? "space-y-4" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"}>
           {filteredTurfs.map((turf) => (
             <TurfCard
@@ -207,15 +215,14 @@ export default function TurfsPage() {
           ))}
         </div>
 
-        {/* No Results */}
         {filteredTurfs.length === 0 && (
-          <div className="text-center py-16">
-            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
-              <Search className="h-16 w-16 text-gray-400" />
+          <div className="text-center py-16 border-2 border-green-500 rounded-2xl">
+            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center border-4 border-green-500">
+              <Search className="h-16 w-16 text-green-400" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">No turfs found</h3>
-            <p className="text-gray-600 mb-6">Try adjusting your filters or search criteria</p>
-            <Button variant="outline" className="rounded-xl bg-white hover:bg-gray-50" onClick={resetFilters}>
+            <h3 className="text-2xl font-bold text-green-700 mb-2">No turfs found</h3>
+            <div className="mb-6 text-green-600">Try adjusting your filters or search criteria</div>
+            <Button variant="outline" className="rounded-xl bg-white border-2 border-green-500 text-green-700 hover:bg-green-50" onClick={resetFilters}>
               <RotateCcw className="h-4 w-4 mr-2" />
               Clear All Filters
             </Button>
