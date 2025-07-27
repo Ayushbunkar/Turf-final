@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   DialogHeader,
@@ -39,6 +40,7 @@ const TurfDetailsModal = ({ turf }) => {
   const [selectedRange, setSelectedRange] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedSlots, setSelectedSlots] = useState([]);
+  const navigate = useNavigate();
   if (!turf) return null;
   const WeatherIcon = weatherIcons[turf?.weather?.condition] || weatherIcons.sunny;
 
@@ -184,7 +186,24 @@ const TurfDetailsModal = ({ turf }) => {
               ))}
             </ul>
             <div className="mt-2 font-bold text-green-700">Total Price: ₹{totalPrice}</div>
-            <Button className="mt-3 bg-green-600 text-white font-bold" onClick={() => alert(`Booked ${selectedSlots.length} hour(s) on ${selectedRange ? `${selectedRange[0]?.toLocaleDateString()} - ${selectedRange[1]?.toLocaleDateString()}` : selectedDate.toLocaleDateString()} for ₹${totalPrice}`)}>
+            <Button
+              className="mt-3 bg-green-600 text-white font-bold"
+              onClick={() => {
+                // Prepare booking details for payment page
+                const dateStr = selectedRange
+                  ? `${selectedRange[0]?.toLocaleDateString()} - ${selectedRange[1]?.toLocaleDateString()}`
+                  : selectedDate?.toLocaleDateString();
+                const slotsStr = selectedSlots.map(idx => hourlySlots[idx].time).join(", ");
+                const params = new URLSearchParams({
+                  tid: turf.id,
+                  name: turf.name,
+                  price: totalPrice,
+                  date: dateStr,
+                  slots: slotsStr,
+                });
+                navigate(`/payment?${params.toString()}`);
+              }}
+            >
               Book Now
             </Button>
           </div>
