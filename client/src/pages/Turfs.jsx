@@ -1,54 +1,35 @@
-// src/pages/TurfsPage.jsx
-
-import React from "react";
-
-import { useState } from "react"
-import { Button } from "../components/ui/Button.jsx"
-import { Card } from "../components/ui/Card.jsx"
-import { MapPin, Search, RotateCcw } from "lucide-react"
-
-import TopNavigation from "../components/Navigation/TopNavigation"
-import SearchBar from "../components/Search/SearchBar"
-import AdvancedFilters from "../components/Filters/AdvancedFilters.jsx"
-import ReferralPanel from "../components/ReferralPanel.jsx"
-import TurfCard from "../components/TurfCard/TurfCard.jsx"
-import ChatWidget from "../components/ChatWidget.jsx"
-import NotificationPanel from "../components/NotificationPanel.jsx"
-import FloatingActionButtons from "../components/FloatingActionButtons.jsx"
-
-import { useFilters } from "../hooks/useFilters"
-import { useUserLocation } from "../hooks/useUserLocation"
-
-import {
-  shareTurf,
-  getDirections,
-  calculateCartTotal,
-} from "../utils/turfUtils"
-import { getDistanceFromGoogleMaps } from "../utils/googleMapsUtils.js"
-
-import {
-  defaultNotifications,
-} from "../constants/appConstants"
-
-import mockTurfs from "../constants/mockTurfs.js"
-
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-} from "@react-google-maps/api"
+// ...existing code...
+import React, { useState } from "react";
+import { Button } from "../components/ui/Button.jsx";
+import { Card } from "../components/ui/Card.jsx";
+import { Search, RotateCcw } from "lucide-react";
+import TopNavigation from "../components/TopNavigation.jsx";
+import SearchBar from "../components/SearchBar.jsx";
+import AdvancedFilters from "../components/AdvancedFilters.jsx";
+import ReferralPanel from "../components/ReferralPanel.jsx";
+import TurfCard from "../components/TurfCard.jsx";
+import ChatWidget from "../components/ChatWidget.jsx";
+import NotificationPanel from "../components/NotificationPanel.jsx";
+import FloatingActionButtons from "../components/FloatingActionButtons.jsx";
+import { useFilters } from "../hooks/useFilters";
+import { useUserLocation } from "../hooks/useUserLocation";
+import { shareTurf, getDirections, calculateCartTotal } from "../utils/turfUtils";
+import { getDistanceFromGoogleMaps } from "../utils/googleMapsUtils.js";
+import { defaultNotifications } from "../constants/appConstants";
+import mockTurfs from "../constants/mockTurfs.js";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
-}
+};
 
 const defaultCenter = {
   lat: 19.076,
   lng: 72.8777,
-}
+};
 
-export default function TurfsPage() {
+export default function Turfs() {
   const [turfs, setTurfs] = useState(mockTurfs)
   const [distances, setDistances] = useState({})
   const [selectedTurf, setSelectedTurf] = useState(null)
@@ -160,9 +141,9 @@ export default function TurfsPage() {
             Explore & book top-notch turf arenas with ease and flair.
           </p>
           <div className="flex justify-center space-x-8 mt-6 animate-fade-in delay-200">
-            <Stats count={turfs.length} label="Turfs Available" color="white" />
-            <Stats count="24/7" label="Customer Support" color="white" />
-            <Stats count="1.2K+" label="Players Joined" color="white" />
+            <Stats count={turfs.length} label="Turfs Available" color="green" />
+            <Stats count="24/7" label="Customer Support" color="green" />
+            <Stats count="1.2K+" label="Players Joined" color="green" />
           </div>
         </div>
 
@@ -197,7 +178,6 @@ export default function TurfsPage() {
           </Card>
         )}
 
-        
         <div className={viewMode === "list" ? "space-y-4" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"}>
           {filteredTurfs.map((turf) => (
             <TurfCard
@@ -235,13 +215,13 @@ export default function TurfsPage() {
         <NotificationPanel {...{ showNotifications, setShowNotifications, notifications }} />
       </div>
     </div>
-  )
+  );
 }
 
 // Stats component
 const Stats = ({ count, label, color }) => (
   <div className="text-center">
-    <div className={`text-2xl font-bold text-${color}-400 animate-fade-in`}>{count}</div>
+    <div className={`text-2xl font-bold text-${color}-500 animate-fade-in`}>{count}</div>
     <div className="text-sm text-white/70 animate-fade-in delay-100">{label}</div>
   </div>
-)
+);

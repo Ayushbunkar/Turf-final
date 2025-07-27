@@ -12,6 +12,7 @@ import contactRoutes from './src/routes/contactRoutes.js'; // If exists
 import userRoutes from './src/routes/userRoutes.js'; 
 import turfRoutes from './src/routes/turfRoutes.js';
 import mapsRoutes from './src/routes/mapsRoutes.js';
+import razorpayRoutes from './src/payment/razorpayRoutes.js';
 
 
 dotenv.config();
@@ -44,6 +45,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/turfs', turfRoutes);
 app.use('/api/maps', mapsRoutes);
+app.use('/api/payment/razorpay', razorpayRoutes);
 
 // Default route
 
