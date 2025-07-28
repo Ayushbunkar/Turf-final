@@ -1,5 +1,5 @@
 import React from "react";
 import { Card as CardComponent } from "./Card.jsx";
 
-const Card = CardComponent;
-export default Card;
+export const Card = CardComponent;
+export default CardComponent;

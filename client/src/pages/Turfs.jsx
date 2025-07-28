@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Button } from "../components/ui/Button.jsx";
 import { Card } from "../components/ui/Card.jsx";
 import { Search, RotateCcw } from "lucide-react";
-import TopNavigation from "../components/TopNavigation.jsx";
-import SearchBar from "../components/SearchBar.jsx";
-import AdvancedFilters from "../components/AdvancedFilters.jsx";
-import ReferralPanel from "../components/ReferralPanel.jsx";
-import TurfCard from "../components/TurfCard.jsx";
-import ChatWidget from "../components/ChatWidget.jsx";
+import TopNavigation from "../components/Navigation/TopNavigation.jsx";
+import SearchBar from "../components/Search/SearchBar.jsx";
+import AdvancedFilters from "../components/Filters/AdvancedFilters.jsx";
+import ReferralPanel from "../components/Referral/ReferralPanel.jsx";
+import TurfCard from "../components/TurfCard/TurfCard.jsx";
+import ChatWidgetToggle from "../components/Chat/ChatWidgetToggle.jsx";
 import NotificationPanel from "../components/NotificationPanel.jsx";
-import FloatingActionButtons from "../components/FloatingActionButtons.jsx";
+import FloatingActionButtons from "../components/FloatingActions/FloatingActionButtons.jsx";
 import { useFilters } from "../hooks/useFilters";
 import { useUserLocation } from "../hooks/useUserLocation";
 import { shareTurf, getDirections, calculateCartTotal } from "../utils/turfUtils";
@@ -210,8 +210,7 @@ export default function Turfs() {
         )}
 
         {/* Extras */}
-        <FloatingActionButtons setShowChat={setShowChat} />
-        <ChatWidget {...{ showChat, setShowChat }} />
+        <ChatWidgetToggle {...{ showChat, setShowChat }} />
         <NotificationPanel {...{ showNotifications, setShowNotifications, notifications }} />
       </div>
     </div>

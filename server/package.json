@@ -1,11 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Backend for TurfTime",
+  "description": "Backend for TurfTime - Turf Booking Platform",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "test": "echo \"No tests specified\" && exit 1"
   },
   "author": "Ayush",
   "license": "ISC",
@@ -32,6 +35,10 @@
     "react-router-dom": "^7.7.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "eslint": "^8.45.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

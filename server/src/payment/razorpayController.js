@@ -2,8 +2,8 @@ import Razorpay from 'razorpay';
 import crypto from 'crypto';
 
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
+  key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_1234567890abcdef',
+  key_secret: process.env.RAZORPAY_KEY_SECRET || 'test_secret_key_abcdef123456',
 });
 
 export async function createOrder(req, res) {
