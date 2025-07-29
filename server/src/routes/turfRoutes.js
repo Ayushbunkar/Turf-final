@@ -1,15 +1,7 @@
-// /server/routes/turfRoutes.js
-import express from 'express';
-const router = express.Router();
-import Turf from '../models/Turf.js'; // your turf schema
+import express from "express";
+import { getAllTurfs } from "../controllers/turfController.js";
 
-router.get('/', async (req, res) => {
-  try {
-    const turfs = await Turf.find();
-    res.json(turfs);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+const router = express.Router();
+router.get("/", getAllTurfs); // GET /api/turfs
 
 export default router;

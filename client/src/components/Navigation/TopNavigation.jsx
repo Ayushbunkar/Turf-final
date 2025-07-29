@@ -48,25 +48,7 @@ const TopNavigation = ({
       </div>
 
       <div className="flex items-center space-x-4">
-        {/* Loyalty Points */}
-        <div className="flex items-center space-x-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-2 rounded-full">
-          <Award className="h-4 w-4 text-green-700" />
-          <span className="font-semibold text-green-700">{userProfile.loyaltyPoints} pts</span>
-        </div>
-
-        {/* Cart */}
-        <Button
-          variant="outline"
-          size="sm"
-          className="relative transition-all duration-300 hover:scale-105 bg-green-100 border-2 border-green-600 text-green-700"
-        >
-          <ShoppingCart className="h-4 w-4" />
-          {cart.length > 0 && (
-            <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-red-500 animate-bounce">
-              {cart.length}
-            </Badge>
-          )}
-        </Button>
+       
 
         {/* Notifications */}
         <Button
@@ -83,16 +65,7 @@ const TopNavigation = ({
           )}
         </Button>
 
-        {/* Profile */}
-        <div className="flex items-center space-x-2 bg-white rounded-full p-2 shadow-md">
-          <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-700 rounded-full flex items-center justify-center text-white font-semibold border-2 border-green-600">
-            {userProfile.name.charAt(0)}
-          </div>
-          <div className="hidden md:block">
-            <div className="text-sm font-semibold text-green-700">{userProfile.name}</div>
-            <div className="text-xs text-green-600">{userProfile.membershipTier}</div>
-          </div>
-        </div>
+       
       </div>
     </div>
   )

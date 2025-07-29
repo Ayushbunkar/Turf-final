@@ -13,6 +13,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import { Toaster } from 'react-hot-toast';
+import Test from './pages/test';
 
 function TestUI() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/test-ui" element={<TestUI />} />
+          <Route path="/test" element={<Test />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
