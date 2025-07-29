@@ -9,7 +9,7 @@ export const signup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Check if the user already exists
+    // Check if the user already existsadffsd
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ message: 'User already exists' }); // 409 Conflict
