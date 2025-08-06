@@ -31,7 +31,18 @@ export default function Turfs() {
   const [favorites, setFavorites] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [show, setShow] = useState({ filters: false, chat: false, notifications: false, referral: false });
-  const [userProfile] = useState(() => JSON.parse(localStorage.getItem("user")) || { name: "Guest" });
+  
+  // ✅ Fixed JSON parsing from localStorage
+  const [userProfile] = useState(() => {
+    try {
+      const stored = localStorage.getItem("user");
+      return stored ? JSON.parse(stored) : { name: "Guest" };
+    } catch (e) {
+      console.error("Failed to parse user from localStorage:", e);
+      return { name: "Guest" };
+    }
+  });
+
   const [referralCode, setReferralCode] = useState("");
 
   const userLocation = useUserLocation();
