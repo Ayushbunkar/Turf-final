@@ -1,18 +1,22 @@
-// Example enhancement for TurfCard.jsx
-export default function TurfCard({
-  turf,
-  distance,
-  getDirections,
-  ...otherProps
-}) {
-  // ...existing code...
+import React from 'react';
+import { useNavigate, useLocation, Routes, Route } from 'react-router-dom';
+import { Button } from '@/components/ui/button'; // adjust to your project
+import { Card } from '@/components/ui/card';     // adjust to your project
+
+// ✅ TurfCard Component
+export function TurfCard({ turf, distance }) {
+  const navigate = useNavigate();
+
+  const handleGetDirections = () => {
+    navigate('/test', { state: { turf } }); // navigate with turf data
+  };
 
   return (
-    <Card>
+    <Card className="p-4 rounded-xl shadow-md">
       {turf.photo && (
         <img
           src={turf.photo}
-          alt={turf.name + " photo"}
+          alt={turf.name + ' photo'}
           className="w-full h-40 object-cover rounded-t-xl mb-2"
         />
       )}
@@ -24,13 +28,36 @@ export default function TurfCard({
       ) : (
         <div className="text-gray-500">Distance N/A</div>
       )}
-      <Button
-        className="mt-2"
-        onClick={() => getDirections(turf)}
-      >
+      <Button className="mt-2" onClick={handleGetDirections}>
         Get Directions
       </Button>
-      {/* ...rest of your card */}
     </Card>
+  );
+}
+
+// ✅ Test Page Component (Testdirection)
+export function Testdirection() {
+  const location = useLocation();
+  const turf = location.state?.turf;
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Directions to Turf</h1>
+      {turf ? (
+        <div>
+          <h2 className="text-xl font-semibold">{turf.name}</h2>
+          <p>{turf.address}</p>
+          {turf.photo && (
+            <img
+              src={turf.photo}
+              alt={turf.name}
+              className="w-full max-w-md mt-4 rounded-xl"
+            />
+          )}
+        </div>
+      ) : (
+        <p>No turf data found.</p>
+      )}
+    </div>
   );
 }

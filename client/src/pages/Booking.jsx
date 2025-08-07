@@ -1,54 +1,59 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [dateTime, setDateTime] = useState(new Date());
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    if (!name || !email || !dateTime) {
+      setError('Please fill in all fields');
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await axios.post('http://localhost:4500/api/bookings', {
         name,
         email,
         dateTime,
       });
-      alert('Booking successful! Confirmation sent.');
-      setName('');
-      setEmail('');
-      setDateTime(new Date());
+      navigate('/payment', { state: { bookingDetails: res.data } });
     } catch (err) {
       console.error(err);
-      alert('Error booking turf');
+      setError('Error booking turf. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen pt-20 bg-white">
-      {/* Hero */}
       <section className="py-16 bg-green-600">
+        {/* ... (hero section content) ... */}
+      </section>
+
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Book Your Turf</h1>
-            <p className="text-xl text-green-100 max-w-2xl mx-auto">Select your preferred date and time slot.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Booking Form */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-6 text-center text-green-700">Booking Form</h2>
+            {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
@@ -76,12 +81,13 @@ const Booking = () => {
               />
               <button
                 type="submit"
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded disabled:opacity-50"
+                disabled={loading}
               >
-                Book Now
+                {loading ? 'Processing...' : 'Book Now'}
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

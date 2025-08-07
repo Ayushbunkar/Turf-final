@@ -17,7 +17,7 @@ const mockTurfs = [
     location: { lat: 19.076, lng: 72.8777 },
     established: "2018-01-01",
     reviews: 120,
-    photo: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    photo: "https://5.imimg.com/data5/IOS/Default/2021/8/LU/WJ/YO/8892103/product-jpeg-1000x1000.png",
   },
   {
     id: 2,
