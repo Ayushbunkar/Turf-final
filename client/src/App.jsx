@@ -14,6 +14,7 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import { Toaster } from 'react-hot-toast';
 import Test from './pages/test';
+import TurfAdminDashboard from "./pages/TurfAdminDashboard";
 
 function TestUI() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/test-ui" element={<TestUI />} />
           <Route path="/test" element={<Test />} />
+           <Route path="/" element={<TurfAdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

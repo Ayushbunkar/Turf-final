@@ -6,10 +6,10 @@ import {
   loginAdmin,
   getAllUsers,
   getAllBookings,
-} from '../controllers/adminController.js';
+} from '../controllers/turfadminController.js';
 
 import { authenticate } from '../middleware/authenticate.js';
-import { isAdmin } from '../middleware/isAdmin.js';
+import { isAdmin } from '../middleware/turfisAdmin.js';
 
 const router = express.Router();
 
