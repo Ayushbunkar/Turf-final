@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import axios from 'axios';
-import { Button } from '../components/ui/Button.jsx';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { Button } from "../components/ui/Button.jsx";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,16 +17,35 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:4500/api/auth/login', formData);
-      toast.success('Login successful!');
-      
-      // Save token or user info as needed
-      localStorage.setItem('token', res.data.token);
+      const res = await axios.post(
+        "http://localhost:4500/api/auth/login",
+        formData,
+        { withCredentials: true } // ✅ If you're using cookies for JWT
+      );
 
-      // Navigate to dashboard or home
-      navigate('/dashboard');
+      // Expecting backend to send: { token, user: { role, email, name } }
+      const { token, user } = res.data;
+
+      toast.success(`${user.role} login successful!`);
+
+      // Save token & user info
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // Redirect based on role
+      switch (user.role) {
+        case "admin":
+          navigate("/admin-dashboard");
+          break;
+        case "turfAdmin":
+          navigate("/turfadmin-dashboard");
+          break;
+        default:
+          navigate("/user-dashboard");
+          break;
+      }
     } catch (err) {
-      const message = err.response?.data?.message || 'Login failed';
+      const message = err.response?.data?.message || "Login failed";
       toast.error(message);
     }
   };
@@ -46,7 +65,10 @@ const Login = () => {
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-gray-700 text-sm font-medium mb-2"
+                >
                   Email Address
                 </label>
                 <input
@@ -60,7 +82,10 @@ const Login = () => {
                 />
               </div>
               <div className="mb-6">
-                <label htmlFor="password" className="block text-gray-700 text-sm font-medium mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-700 text-sm font-medium mb-2"
+                >
                   Password
                 </label>
                 <input
@@ -79,8 +104,11 @@ const Login = () => {
             </form>
             <div className="mt-6 text-center">
               <p className="text-gray-600">
-                Don&apos;t have an account?{' '}
-                <Link to="/signup" className="text-green-600 hover:text-green-700 font-medium">
+                Don&apos;t have an account?{" "}
+                <Link
+                  to="/signup"
+                  className="text-green-600 hover:text-green-700 font-medium"
+                >
                   Sign up
                 </Link>
               </p>

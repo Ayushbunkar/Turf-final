@@ -11,10 +11,12 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import UserDashboard from './pages/UserDashboard';
 import NotFound from './pages/NotFound';
 import { Toaster } from 'react-hot-toast';
 import Test from './pages/test';
 import TurfAdminDashboard from "./pages/TurfAdminDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function TestUI() {
   return (
@@ -58,10 +60,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
           <Route path="/test-ui" element={<TestUI />} />
           <Route path="/test" element={<Test />} />
            <Route path="/" element={<TurfAdminDashboard />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </main>
       <Footer />

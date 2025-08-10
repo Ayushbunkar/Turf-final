@@ -1,14 +1,22 @@
+// controllers/turfadminController.js
+
 import Admin from '../models/turfAdmin.js';
 import User from '../models/User.js';
 import Booking from '../models/Booking.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+// ✅ Register Turf Admin (requires secret key)
 export const registerAdmin = async (req, res) => {
-  const { name, email, password, turfName, phoneNumber } = req.body;
+  const { name, email, password, turfName, phoneNumber, secretKey } = req.body;
 
-  if (!name || !email || !password || !turfName || !phoneNumber) {
-    return res.status(400).json({ message: 'All fields are required' });
+  if (!name || !email || !password || !turfName || !phoneNumber || !secretKey) {
+    return res.status(400).json({ message: 'All fields including secretKey are required' });
+  }
+
+  // Check if secretKey matches environment variable
+  if (secretKey !== process.env.TURF_ADMIN_SECRET) {
+    return res.status(403).json({ message: 'Invalid secret key' });
   }
 
   try {
@@ -23,20 +31,21 @@ export const registerAdmin = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role: 'admin',
+      role: 'turfadmin', // ✅ distinguish from superadmin
       turfName,
       phoneNumber
     });
 
     await newAdmin.save();
 
-    return res.status(201).json({ message: 'Admin registered successfully' });
+    return res.status(201).json({ message: 'Turf Admin registered successfully' });
   } catch (error) {
     console.error('[RegisterAdmin] Error:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
 
+// ✅ Login for both superadmin & turfadmin
 export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
 
@@ -61,17 +70,13 @@ export const loginAdmin = async (req, res) => {
       { expiresIn: '1d' }
     );
 
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'Strict',
-      maxAge: 24 * 60 * 60 * 1000
-    });
-
+    // ✅ Return role so frontend can redirect properly
     return res.status(200).json({
       message: 'Login successful',
+      token,
       admin: {
         id: admin._id,
+        name: admin.name,
         email: admin.email,
         role: admin.role,
         turfName: admin.turfName,
@@ -84,6 +89,7 @@ export const loginAdmin = async (req, res) => {
   }
 };
 
+// ✅ Superadmin / Turfadmin view all users
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find().select('-password');
@@ -94,6 +100,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+// ✅ Superadmin / Turfadmin view all bookings
 export const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.find().populate('user turf');

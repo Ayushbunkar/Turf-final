@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       match: [
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
         'Please enter a valid email address',
       ],
     },
@@ -26,8 +26,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'], // Only allow 'user' or 'admin'
-      default: 'user',          // Default role is user
+      enum: ['user', 'admin', 'turfAdmin'], // ✅ Added turfAdmin
+      default: 'user', // Default role is user
     },
   },
   { timestamps: true }
