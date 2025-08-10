@@ -1,9 +1,10 @@
 // src/pages/TurfAdminDashboard.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import TurfCard from "../components/Turfcard/TurfCard";
+import TurfCard from "../components/TurfCard/TurfCard.jsx";
 import TurfForm from "../components/TurfForm/TurfForm";
-
+import TurfAdminSidebar from "../components/TurfAdminSidebar";
+import { Outlet } from "react-router-dom";
 
 export default function TurfAdminDashboard() {
   const [turfs, setTurfs] = useState([]);
@@ -22,14 +23,11 @@ export default function TurfAdminDashboard() {
   }, []);
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">🏟️ Turf Admin Dashboard</h1>
-      <TurfForm onTurfAdded={fetchTurfs} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-        {turfs.map((turf) => (
-          <TurfCard key={turf._id} turf={turf} />
-        ))}
-      </div>
+    <div className="flex">
+      <TurfAdminSidebar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
     </div>
   );
 }
