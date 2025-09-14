@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "../ui/Button"
 import { X } from "lucide-react"
 
 const NotificationPanel = ({ showNotifications, setShowNotifications, notifications }) => {

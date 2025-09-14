@@ -1,8 +1,8 @@
 "use client"
 
 import { Card } from "../ui/Card.jsx"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/Select"
+import { Slider } from "../ui/Slider"
 import { Navigation, DollarSign, Star, Activity } from "lucide-react"
 
 const AdvancedFilters = ({ filters, setFilters, showFilters }) => {

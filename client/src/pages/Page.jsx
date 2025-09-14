@@ -1,12 +1,12 @@
 "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
+import { Button } from "../components/ui/Button"
+import { Input } from "../components/ui/Input"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
+import { Badge } from "../components/ui/Badge"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/Select"
+import { Slider } from "../components/ui/Slider"
 import {
   Dialog,
   DialogContent,
@@ -14,9 +14,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar } from "@/components/ui/calendar"
+} from "../components/ui/Dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/Tabs"
+import { Calendar } from "../components/ui/Calendar"
 import {
   MapPin,
   Search,

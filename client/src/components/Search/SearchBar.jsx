@@ -1,8 +1,8 @@
 "use client"
 
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Input } from "../ui/Input"
+import { Button } from "../ui/Button"
+import { Badge } from "../ui/Badge"
 import { Search, Filter, X, Gift, RotateCcw } from "lucide-react"
 
 const SearchBar = ({

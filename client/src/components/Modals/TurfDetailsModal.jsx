@@ -8,12 +8,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "../ui/Dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/Tabs";
 import { Card } from "../ui/Card.jsx";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Badge } from "../ui/Badge";
+import { Button } from "../ui/Button";
+import { Calendar } from "../ui/Calendar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker-custom.css";

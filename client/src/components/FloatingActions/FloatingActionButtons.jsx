@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "../ui/Button"
 import { MessageCircle, ArrowUp } from "lucide-react"
 
 const FloatingActionButtons = ({ setShowChat }) => {

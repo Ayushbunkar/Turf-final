@@ -1,4 +1,4 @@
-import Turf from "../models/Turf.js";
+import Turf from "../models/turfModel.js";
 
 export async function getAllTurfs(req, res) {
   try {

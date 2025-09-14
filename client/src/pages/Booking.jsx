@@ -3,6 +3,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import api from '../lib/api';
 
 const Booking = () => {
   const [name, setName] = useState('');
@@ -24,7 +25,7 @@ const Booking = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:4500/api/bookings', {
+      const res = await api.post('/bookings', {
         name,
         email,
         dateTime,

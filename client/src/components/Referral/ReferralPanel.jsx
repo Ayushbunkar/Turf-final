@@ -1,8 +1,8 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Card } from "../ui/Card"
+import { Input } from "../ui/Input"
+import { Button } from "../ui/Button"
 import { Gift, Copy } from "lucide-react"
 
 const ReferralPanel = ({ showReferral, referralCode, setReferralCode }) => {

@@ -1,6 +1,6 @@
 // src/components/ui/tabs.jsx
 import * as TabsPrimitive from "@radix-ui/react-tabs";
-import { cn } from "@/lib/utils"; // make sure this exists or replace with classNames
+import { cn } from "../../lib/utils"; // make sure this exists or replace with classNames
 
 export const Tabs = TabsPrimitive.Root;
 

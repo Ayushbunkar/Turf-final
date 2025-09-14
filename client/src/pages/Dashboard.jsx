@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import api from '../lib/api';
 import { FaUserCircle, FaCalendarCheck, FaChartPie } from 'react-icons/fa';
 
 const fadeInUp = {
@@ -16,9 +16,7 @@ const Dashboard = () => {
     const fetchUser = async () => {
       const token = localStorage.getItem('token');
       try {
-        const { data } = await axios.get('http://localhost:4500/api/user/profile', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const { data } = await api.get('/user/profile');
         setUser(data.user);
       } catch (err) {
         console.error('Failed to fetch user:', err);
