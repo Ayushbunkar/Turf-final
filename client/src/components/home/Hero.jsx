@@ -69,7 +69,8 @@ const Hero = () => {
         </motion.div>
         <div className="absolute inset-0 bg-black/70 bg-opacity-60" />
 
-        {/* Floating particles */}
+        {/* Floating particles */} 
+        //fxj
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <motion.div
