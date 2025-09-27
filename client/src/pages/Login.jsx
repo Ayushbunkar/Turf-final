@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,18 +14,18 @@ export default function Login() {
 
   const getRedirectPath = (userRole) => {
     const params = new URLSearchParams(location.search);
-    const redirect = params.get('redirect');
-    
+    const redirect = params.get("redirect");
+
     if (redirect) return redirect;
-    
+
     switch (userRole) {
-      case 'admin':
-        return '/admin';
-      case 'turfadmin':
-        return '/turfadmin';
-      case 'user':
+      case "admin":
+        return "/admin";
+      case "turfadmin":
+        return "/turfadmin";
+      case "user":
       default:
-        return '/user-dashboard';
+        return "/user-dashboard";
     }
   };
 
@@ -39,19 +40,27 @@ export default function Login() {
       navigate(redirectPath);
     } catch (error) {
       setIsLoading(false);
+      toast.error("Login failed. Check your credentials.");
       console.error("Login error:", error);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <div className="text-center">
-            <svg className="mx-auto h-16 w-16 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-3.6-4.2l1.2-1.2L12 17l3.4-3.4 1.2 1.2L12 19.4l-3.6-3.6z"/>
-            </svg>
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-lg p-8"
+      >
+        <div className="text-center">
+          <svg
+            className="mx-auto h-16 w-16 text-green-600"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-3.6-4.2l1.2-1.2L12 17l3.4-3.4 1.2 1.2L12 19.4l-3.6-3.6z" />
+          </svg>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to Turf Time
           </h2>
@@ -59,14 +68,15 @@ export default function Login() {
             Or{" "}
             <Link
               to="/signup"
-              className="font-medium text-green-600 hover:text-green-500"
+              className="font-medium text-green-600 hover:text-green-500 transition"
             >
               create a new account
             </Link>
           </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+
+        <form className="mt-8  space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm space-y-">
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -77,7 +87,7 @@ export default function Login() {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -93,7 +103,7 @@ export default function Login() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -120,18 +130,21 @@ export default function Login() {
             <div className="text-sm">
               <a
                 href="#"
-                className="font-medium text-green-600 hover:text-green-500"
+                className="font-medium text-green-600 hover:text-green-500 transition"
               >
                 Forgot your password?
               </a>
             </div>
           </div>
 
-          <div>
-            <button
+          <div className="space-y-4">
+            {/* Sign in Button */}
+            <motion.button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-green-500 to-green-600 shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
               {isLoading ? (
                 <svg
@@ -157,11 +170,21 @@ export default function Login() {
               ) : (
                 "Sign in"
               )}
-            </button>
-          </div>
+            </motion.button>
 
+            {/* Signup Link */}
+            <Link to="/signup">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full flex justify-center py-3 px-4 border border-green-500 text-sm font-medium rounded-xl text-green-600 bg-white shadow-sm hover:bg-green-50 hover:shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Create New Account
+              </motion.button>
+            </Link>
+          </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }

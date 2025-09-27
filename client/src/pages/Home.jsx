@@ -21,7 +21,7 @@ const featuredTurfs = [
     name: 'Green Valley Turf',
     location: 'Downtown Sports Complex',
     image:
-      'https://images.unsplash.com/photo-1571056642178-2b3b6b4cfbab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+      'https://imgs.search.brave.com/B7B-G8u1Y92YUp7YmUluwY8i0JBzQGvK1JEFy966aZg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvOTQ3/MzYzOTU4L3Bob3Rv/L2xvb2tpbmctZG93/bi1vbi1hLWNyaWNr/ZXQtYmFsbC1zaXR0/aW5nLWluLXRoZS1n/cmFzcy13aXRoLWEt/YmF0LW9uLWVkZ2Uu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PThPNXhQZlhOcE10/eWJKODhZa0N5b2t5/TVR1Y1JaMG01U3Bn/SkttZE1MTEU9',
     price: 50,
     rating: 4.8,
     type: '5-a-side',

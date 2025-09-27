@@ -1,49 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useMotionValue, useAnimation } from 'framer-motion';
-import { ArrowRightIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { motion, useMotionValue, useAnimation } from "framer-motion";
+import { ArrowRightIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "../ui/Button.jsx";
-import footballImg from '../../assets/football.png';
+import footballImg from "../../assets/football.png";
 
 const Hero = () => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const controls = useAnimation();
   const [isMoving, setIsMoving] = useState(false);
-  let timer;
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      const offsetX = (e.clientX - centerX) / 20;
-      const offsetY = (e.clientY - centerY) / 20;
-
-      x.set(offsetX);
-      y.set(offsetY);
-      setIsMoving(true);
-
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        setIsMoving(false);
-      }, 2000);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(timer);
-    };
-  }, [x, y]);
 
   useEffect(() => {
     if (!isMoving) {
       controls.start({
-        y: [0, -20, 0],
+        y: [0, -15, 0],
         transition: {
           duration: 2,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         },
       });
     } else {
@@ -52,37 +27,38 @@ const Hero = () => {
   }, [isMoving, controls]);
 
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center overflow-hidden overflow-x-hidden">
       {/* Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute -top-1 inset-0 z-0 w-full h-full">
         <motion.div
-          initial={{ scale: 1.1 }}
+          initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5 }}
-          className="w-full h-full"
+          className="absolute inset-0 w-full h-full"
         >
           <img
             src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1936&q=80"
             alt="Football turf"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-black/70 bg-opacity-60" />
 
-        {/* Floating particles */} 
-        //fxjdfsdf
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/70" />
+
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 rounded-full bg-green-400 opacity-70"
+              className="absolute w-1.5 h-1.5 rounded-full bg-green-400 opacity-70"
               initial={{
                 x: `${Math.random() * 100}%`,
                 y: `${Math.random() * 100}%`,
-                scale: Math.random() * 0.5 + 0.5,
+                scale: Math.random() * 0.4 + 0.4,
               }}
               animate={{
-                y: ['0%', '-100%'],
+                y: ["0%", "-100%"],
                 opacity: [0, 0.7, 0],
               }}
               transition={{
@@ -95,23 +71,24 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 lg:px-12 z-10 pt-20 pb-10">
-        <div className="max-w-3xl text-center lg:text-left">
+      {/* Content wrapper */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 z-10 pt-20 pb-10 flex flex-col items-center lg:items-start justify-center h-full">
+        {/* Text Block */}
+        <div className="max-w-4xl text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-              Book Your Perfect{' '}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight">
+              Book Your Perfect{" "}
               <motion.span
                 className="text-green-500 inline-block"
                 animate={{ rotateX: [0, 15, 0], scale: [1, 1.05, 1] }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  repeatType: 'reverse',
+                  repeatType: "reverse",
                 }}
               >
                 Turf Experience
@@ -120,15 +97,16 @@ const Hero = () => {
           </motion.div>
 
           <motion.p
-            className="text-base sm:text-lg md:text-xl text-gray-200 mb-8"
+            className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-200 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Experience the thrill of playing on premium turfs. Easy booking, great facilities,
-            and unforgettable moments await you.
+            Experience the thrill of playing on premium turfs. Easy booking,
+            great facilities, and unforgettable moments await you.
           </motion.p>
 
+          {/* Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
             initial={{ opacity: 0, y: 20 }}
@@ -137,14 +115,18 @@ const Hero = () => {
           >
             <Link to="/turfs">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg">
+                <Button size="lg" className="w-full sm:w-auto">
                   Explore Turfs <ArrowRightIcon size={20} className="ml-2" />
                 </Button>
               </motion.div>
             </Link>
             <Link to="/about">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" size="lg">
+                <Button
+                  className="bg-white text-black w-full sm:w-auto"
+                  variant="outline"
+                  size="lg"
+                >
                   Learn More
                 </Button>
               </motion.div>
@@ -152,16 +134,22 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Ball - responsive & animated */}
+        {/* Football ball (responsive) */}
         <motion.div
-          className="hidden lg:block absolute right-10 bottom-16 w-28 sm:w-32 md:w-36 lg:w-40 h-28 sm:h-32 md:h-36 lg:h-40"
+          className="absolute right-3 bottom-4 
+          w-12 h-12 
+          sm:w-16 sm:h-16 
+          md:w-20 md:h-20 
+          lg:w-24 lg:h-24 
+          xl:w-28 xl:h-28 
+          2xl:w-32 2xl:h-32"
           style={{ x, y }}
           animate={controls}
         >
           <img
             src={footballImg}
             alt="Football"
-            className="w-full h-full object-cover rounded-full border-4 border-white shadow-xl"
+            className="w-full h-full object-contain rounded-full border border-white shadow-xl"
           />
         </motion.div>
       </div>

@@ -1,8 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Button } from '../ui/Button.jsx';
-import { CalendarIcon } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Button } from "../ui/Button.jsx";
+import { CalendarIcon } from "lucide-react";
 
 const CallToAction = () => {
   return (
@@ -37,9 +37,9 @@ const CallToAction = () => {
               <Button
                 variant="secondary"
                 size="lg"
-                className="shadow-lg flex items-center justify-center w-full sm:w-auto"
+                className="shadow-lg flex items-center bg-white text-green-600  p-1 rounded-full justify-center w-full sm:w-auto"
               >
-                <CalendarIcon size={20} className="mr-2" />
+                <CalendarIcon size={20} className="mr-2 " />
                 Book a Turf Now
               </Button>
             </Link>

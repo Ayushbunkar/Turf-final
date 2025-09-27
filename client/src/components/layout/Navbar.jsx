@@ -1,55 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MenuIcon, XIcon } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { MenuIcon, XIcon } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close menu when navigating
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Turfs', path: '/turfs' },
-    { name: 'Contact', path: '/contact' }
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Turfs", path: "/turfs" },
+    { name: "Contact", path: "/contact" },
   ];
 
-  const navTextColor = !isHome || scrolled ? 'text-black' : 'text-white';
-  const logoColor = 'text-green-600';
+  const navTextColor = !isHome || scrolled ? "text-black" : "text-white";
+  const logoColor = "text-green-600";
+
+  // Reusable button styles
+  const btnBase =
+    "px-5 py-2 font-medium rounded-md transition duration-300";
+  const btnOutline =
+    `${btnBase} border border-green-600 text-green-600 hover:bg-green-600 hover:text-white`;
+  const btnFilled =
+    `${btnBase} bg-green-600 text-white hover:bg-green-700`;
 
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        !isHome || scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        !isHome || scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <motion.div
+            <motion.span
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
+              className={`text-2xl font-bold tracking-wide ${logoColor}`}
             >
-              <span className={`text-2xl font-bold tracking-wide ${logoColor}`}>
-                TurfTime
-              </span>
-            </motion.div>
+              TurfTime
+            </motion.span>
           </Link>
 
           {/* Desktop Nav */}
@@ -58,7 +64,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`font-medium transition duration-300 hover:text-green-600 ${navTextColor}`}
+                className={`font-medium transition hover:text-green-600 ${navTextColor}`}
               >
                 {link.name}
               </Link>
@@ -68,7 +74,7 @@ const Navbar = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-5 py-2 border border-green-600 text-green-600 font-medium rounded-md transition-colors duration-300 hover:bg-green-600 hover:text-white"
+                  className={btnOutline}
                 >
                   Login
                 </motion.button>
@@ -77,7 +83,7 @@ const Navbar = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-5 py-2 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 transition duration-300"
+                  className={btnFilled}
                 >
                   Sign Up
                 </motion.button>
@@ -85,11 +91,12 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Icon */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen((prev) => !prev)}
               className={`p-2 rounded-md transition ${navTextColor}`}
+              aria-label="Toggle menu"
             >
               {isOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
             </button>
@@ -105,9 +112,9 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden mt-4 bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200"
+              className="md:hidden mt-3 bg-white rounded-xl shadow-xl border border-gray-200"
             >
-              <div className="flex flex-col space-y-4 px-4 py-6">
+              <div className="flex flex-col px-4 py-6 space-y-4">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
@@ -117,12 +124,12 @@ const Navbar = () => {
                     {link.name}
                   </Link>
                 ))}
-                <div className="flex flex-col space-y-2 pt-4 border-t border-gray-100">
+                <div className="flex flex-col space-y-3 pt-4 border-t border-gray-100">
                   <Link to="/login">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.97 }}
-                      className="w-full px-5 py-2 border border-green-600 text-green-600 rounded-md font-medium hover:bg-green-600 hover:text-white transition"
+                      className={btnOutline + " w-full"}
                     >
                       Login
                     </motion.button>
@@ -131,7 +138,7 @@ const Navbar = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.97 }}
-                      className="w-full px-5 py-2 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 transition"
+                      className={btnFilled + " w-full"}
                     >
                       Sign Up
                     </motion.button>

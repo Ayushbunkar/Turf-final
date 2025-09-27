@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TopNavigation from "../components/Navigation/TopNavigation.jsx";
 import SearchBar from "../components/Search/SearchBar.jsx";
-import AdvancedFilters from "../components/Filters/AdvancedFilters.jsx";
 import ReferralPanel from "../components/Referral/ReferralPanel.jsx";
 import TurfCard from "../components/TurfAdmin/TurfCard/TurfCard.jsx";
-import ChatWidgetToggle from "../components/Chat/ChatWidgetToggle.jsx";
+import ChatWidget from "../components/Chat/ChatWidgetToggle.jsx";
 import NotificationPanel from "../components/Notifications/NotificationPanel.jsx";
 import FloatingActionButtons from "../components/FloatingActions/FloatingActionButtons.jsx";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
@@ -141,11 +140,7 @@ export default function Turfs() {
         totalTurfs={turfs.length}
       />
 
-      <AdvancedFilters
-        filters={filters}
-        setFilters={setFilters}
-        showFilters={show.filters}
-      />
+
 
       <ReferralPanel
         showReferral={show.referral}
@@ -201,7 +196,7 @@ export default function Turfs() {
         </div>
       )}
 
-      <ChatWidgetToggle showChat={show.chat} setShowChat={(val) => setShow({ ...show, chat: val })} />
+  <ChatWidget showChat={show.chat} setShowChat={(val) => setShow({ ...show, chat: val })} />
       <NotificationPanel
         showNotifications={show.notifications}
         setShowNotifications={(val) => setShow({ ...show, notifications: val })}
