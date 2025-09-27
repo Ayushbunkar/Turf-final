@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import api from '../lib/api';
+import api from '../../../lib/api';
 import { FaUserCircle, FaCalendarCheck, FaChartPie } from 'react-icons/fa';
 
 const fadeInUp = {

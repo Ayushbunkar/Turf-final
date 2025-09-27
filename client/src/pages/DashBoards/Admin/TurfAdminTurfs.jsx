@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // Use service layer instead of direct axios
-import { fetchTurfs as fetchTurfsService, createTurf, updateTurf, deleteTurf } from "../services/turfAdminService";
+import { fetchTurfs as fetchTurfsService, createTurf, updateTurf, deleteTurf } from "../../../services/turfAdminService";
 import toast from "react-hot-toast";
 import { 
   PlusCircle, 

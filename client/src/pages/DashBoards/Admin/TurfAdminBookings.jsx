@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { fetchTurfs as fetchTurfsService } from "../services/turfAdminService";
-import { fetchBookings as fetchBookingsService, updateBookingStatus, exportBookings as exportBookingsService } from "../services/bookingService";
+import { fetchTurfs as fetchTurfsService } from "../../../services/turfAdminService";
+import { fetchBookings as fetchBookingsService, updateBookingStatus, exportBookings as exportBookingsService } from "../../../services/bookingService";
 import toast from "react-hot-toast";
 import { 
   Search, 

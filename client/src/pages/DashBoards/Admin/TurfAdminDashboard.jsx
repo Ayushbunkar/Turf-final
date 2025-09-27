@@ -1,9 +1,9 @@
 // src/pages/TurfAdminDashboard.jsx
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import TurfAdminSidebar from "../components/TurfAdmin/TurfAdminSidebar";
-import api from "../lib/api";
-import { useAuth } from "../context/AuthContext";
+import TurfAdminSidebar from "../../../components/TurfAdmin/TurfAdminSidebar";
+import api from "../../../lib/api";
+import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import toast from "react-hot-toast";
-import api from "../lib/api";
+import api from "../../../lib/api";
 
 export default function TurfAdminSettings() {
   const { user, token } = useAuth();

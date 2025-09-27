@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
-import Sidebar from "../components/ui/Sidebar.jsx";
-import Navbar from "../components/layout/Navbar.jsx";
-import { Card } from "../components/ui/Card.jsx";
-import { Button } from "../components/ui/Button.jsx";
+import Sidebar from "../../../components/ui/Sidebar.jsx";
+import Navbar from "../../../components/layout/Navbar.jsx";
+import { Card } from "../../../components/ui/Card.jsx";
+import { Button } from "../../../components/ui/Button.jsx";
 import { motion } from "framer-motion";
-import api from '../lib/api';
+import api from '../../../lib/api.js';
 import { Calendar, MapPin, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext.jsx";
 import toast from "react-hot-toast";
 
 export default function UserDashboard() {

@@ -12,8 +12,8 @@ import {
   ArrowDownRight 
 } from "lucide-react";
 // Updated relative path to sidebar component in components/TurfAdmin
-import TurfAdminSidebar from "../components/TurfAdmin/TurfAdminSidebar";
-import api from "../lib/api";
+import TurfAdminSidebar from "../../../components/TurfAdmin/TurfAdminSidebar";
+import api from "../../../lib/api";
 import { Outlet } from "react-router-dom";
 
 export default function TurfAdminHome() {

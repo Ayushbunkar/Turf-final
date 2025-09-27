@@ -1,8 +1,8 @@
 // src/pages/AdminDashboard.jsx
 import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
-import AdminSidebar from "../components/TurfAdmin/AdminSidebar";
-import AdminNavbar from "../components/TurfAdmin/AdminNavbar/AdminNavbar";
+import AdminSidebar from "../../../components/TurfAdmin/AdminSidebar";
+import AdminNavbar from "../../../components/TurfAdmin/AdminNavbar/AdminNavbar";
 import { motion } from "framer-motion";
 
 export default function AdminDashboard() {
