@@ -1,9 +1,17 @@
+// Import images at the top
+import turf1 from "./assets/turf1.webp";
+import turf2 from "./assets/turf2.webp";
+import turf3 from "./assets/turf3.webp";
+import turf4 from "./assets/turf4.jpg";
+import turf5 from "./assets/turf5.jpeg";
+import turf6 from "./assets/turf6.webp";
+
 // Demo/mock turfs for frontend testing
 const mockTurfs = [
   {
     id: 1,
-    name: "Greenfield Arena",
-    address: "123 Turf Lane, Mumbai",
+    name: "Blaze Turf",
+    address: "DK-5, Opposite Virasha Heights, Danish Kunj, Kolar Rd, Bhopal, Madhya Pradesh 462042, India",
     description: "Premium football turf with night lighting.",
     price: 1200,
     rating: 4.7,
@@ -14,15 +22,15 @@ const mockTurfs = [
       { time: "6:00-7:00", available: true, price: 1200 },
       { time: "7:00-8:00", available: true, price: 1200 },
     ],
-    location: { lat: 19.076, lng: 72.8777 },
+    location: { lat: 23.1857, lng: 77.4892 }, // Blaze Turf, Bhopal
     established: "2018-01-01",
     reviews: 120,
-    photo: "https://5.imimg.com/data5/IOS/Default/2021/8/LU/WJ/YO/8892103/product-jpeg-1000x1000.png",
+    photo: turf1, // <-- imported image
   },
   {
     id: 2,
-    name: "Victory Sports Park",
-    address: "456 Play St, Pune",
+    name: "Kickoff Arena",
+    address: "Hoshangabad Rd, Near Ashima Mall, Bawadia Kalan, Bhopal, Madhya Pradesh 462026, India",
     description: "Multi-sport turf with great facilities.",
     price: 1000,
     rating: 4.5,
@@ -33,15 +41,15 @@ const mockTurfs = [
       { time: "8:00-9:00", available: true, price: 1000 },
       { time: "9:00-10:00", available: false, price: 1000 },
     ],
-    location: { lat: 18.5204, lng: 73.8567 },
+    location: { lat: 23.1765, lng: 77.4563 }, // Kickoff Arena, Bhopal
     established: "2016-05-15",
     reviews: 85,
-    photo: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80",
+    photo: turf2,
   },
   {
     id: 3,
-    name: "Star Turf",
-    address: "789 Kickoff Ave, Bangalore",
+    name: "Turfside Sports",
+    address: "Ayodhya Bypass Rd, Near Sagar Public School, Bhopal, Madhya Pradesh 462041, India",
     description: "Spacious turf for football and cricket.",
     price: 900,
     rating: 4.2,
@@ -52,15 +60,15 @@ const mockTurfs = [
       { time: "10:00-11:00", available: true, price: 900 },
       { time: "11:00-12:00", available: true, price: 900 },
     ],
-    location: { lat: 12.9716, lng: 77.5946 },
+    location: { lat: 23.2624, lng: 77.4126 }, // Turfside Sports, Bhopal
     established: "2019-09-10",
     reviews: 60,
-    photo: "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=80",
+    photo: turf3,
   },
   {
     id: 4,
-    name: "Arena 24x7",
-    address: "321 Game Rd, Delhi",
+    name: "Green Goalz",
+    address: "BHEL Township, Sector C, Govindpura, Bhopal, Madhya Pradesh 462023, India",
     description: "24/7 open turf for all sports.",
     price: 1500,
     rating: 4.8,
@@ -71,15 +79,15 @@ const mockTurfs = [
       { time: "12:00-13:00", available: true, price: 1500 },
       { time: "13:00-14:00", available: false, price: 1500 },
     ],
-    location: { lat: 28.7041, lng: 77.1025 },
+    location: { lat: 23.2599, lng: 77.4011 }, // Green Goalz, Bhopal
     established: "2020-03-20",
     reviews: 200,
-    photo: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+    photo: turf4,
   },
   {
     id: 5,
-    name: "Goal Masters",
-    address: "654 Win St, Hyderabad",
+    name: "Urban Soccer Park",
+    address: "MP Nagar Zone-II, Near Habibganj Railway Station, Bhopal, Madhya Pradesh 462011, India",
     description: "Perfect turf for football enthusiasts.",
     price: 1100,
     rating: 4.4,
@@ -90,15 +98,15 @@ const mockTurfs = [
       { time: "14:00-15:00", available: true, price: 1100 },
       { time: "15:00-16:00", available: true, price: 1100 },
     ],
-    location: { lat: 17.385, lng: 78.4867 },
+    location: { lat: 23.2197, lng: 77.4336 }, // Urban Soccer Park, Bhopal
     established: "2017-07-07",
     reviews: 95,
-    photo: "https://images.unsplash.com/photo-1504470695779-75300268aa96?auto=format&fit=crop&w=800&q=80",
+    photo: turf5,
   },
   {
     id: 6,
-    name: "PlayZone",
-    address: "987 Fun Blvd, Chennai",
+    name: "AstroPlay Bhopal",
+    address: "Kotra Sultanabad, Near Taj-ul-Masajid, Bhopal, Madhya Pradesh 462003, India",
     description: "Family-friendly turf for all ages.",
     price: 950,
     rating: 4.1,
@@ -109,10 +117,10 @@ const mockTurfs = [
       { time: "16:00-17:00", available: true, price: 950 },
       { time: "17:00-18:00", available: false, price: 950 },
     ],
-    location: { lat: 13.0827, lng: 80.2707 },
+    location: { lat: 23.2467, lng: 77.3936 }, // AstroPlay Bhopal, Bhopal
     established: "2015-11-11",
     reviews: 50,
-    photo: "https://images.unsplash.com/photo-1465378552210-6c50c1f1e2a5?auto=format&fit=crop&w=800&q=80",
+    photo: turf6,
   },
 ];
 

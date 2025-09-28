@@ -14,7 +14,7 @@ import Dashboard from "./pages/DashBoards/User/Dashboard";
 import UserDashboard from "./pages/DashBoards/User/UserDashboard";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "react-hot-toast";
-import Test from "./pages/test";
+import Test from "./pages/Location";
 import TurfAdminDashboard from "./pages/DashBoards/Admin/TurfAdminDashboard";
 import AdminDashboard from "./pages/DashBoards/SuperAdmin/AdminDashboard";
 import AdminUsers from "./pages/DashBoards/SuperAdmin/AdminUsers";
@@ -90,7 +90,7 @@ function AppRoutes() {
               path="/user-dashboard" 
               element={<ProtectedRoute element={<UserDashboard />} requiredRole="user" />} 
             />
-            <Route path="/test" element={<Test />} />
+            <Route path="/Location" element={<Test />} />
 
             {/* Admin Dashboard Nested Routes */}
             <Route path="/admin" element={<ProtectedRoute element={<AdminDashboard />} requiredRole="admin" />}>

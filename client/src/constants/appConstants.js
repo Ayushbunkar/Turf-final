@@ -1,6 +1,5 @@
 import { Sun, Cloud, CloudRain, Wind } from "lucide-react"
 
-// Weather icons mapping
 export const weatherIcons = {
   sunny: Sun,
   cloudy: Cloud,
@@ -8,7 +7,6 @@ export const weatherIcons = {
   windy: Wind,
 }
 
-// Demand color mapping
 export const demandColors = {
   low: "bg-green-100 text-green-800",
   medium: "bg-yellow-100 text-yellow-800",
@@ -42,3 +40,4 @@ export const defaultFilters = {
   rating: [0],
   weatherDependent: "all",
 }
+  

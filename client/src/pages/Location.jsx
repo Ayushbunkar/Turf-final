@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Test = () => {
+const Location = () => {
   const [coords, setCoords] = useState({});
   const goToTurfWithLocation = () => {
     if ("geolocation" in navigator) {
@@ -32,4 +32,4 @@ const Test = () => {
   );
 };
 // adfs
-export default Test;
+export default Location;

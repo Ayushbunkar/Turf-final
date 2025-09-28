@@ -27,7 +27,7 @@ const SearchBar = ({
           <Button
             variant="ghost"
             size="sm"
-            className="absolute left-2 top-2 h-10 w-10 rounded-full hover:bg-green-100 text-green-700 z-10"
+            className="absolute left-2 top-2 h-10 w-10 rounded-full hover:bg-gray-100 text-green-600 z-10"
             aria-label="Search"
             tabIndex={0}
             style={{ pointerEvents: 'none' }}
@@ -38,13 +38,13 @@ const SearchBar = ({
             placeholder="Search turfs by name, location, or amenities..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-12 pr-12 h-14 text-lg border border-green-500 focus:border-green-600 active:border-green-600 rounded-2xl bg-green-50/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg focus:shadow-xl text-green-900"
+            className="pl-12 pr-12 h-14 text-lg border border-green-200 focus:border-green-400 active:border-green-400 rounded-2xl bg-gray-50/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg focus:shadow-xl text-green-900"
           />
           {searchQuery && (
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-2 top-2 h-10 w-10 rounded-full hover:bg-green-100 text-green-700"
+              className="absolute right-2 top-2 h-10 w-10 rounded-full hover:bg-gray-100 text-green-600"
               onClick={() => setSearchQuery("")}
               aria-label="Clear search"
             >
@@ -56,12 +56,12 @@ const SearchBar = ({
         <Button
           variant="outline"
           onClick={() => setShowFilters(!showFilters)}
-          className="h-14 px-8 border border-green-500 focus:border-green-600 active:border-green-600 rounded-2xl bg-green-50/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg group text-green-900"
+          className="h-14 px-8 border border-green-200 focus:border-green-400 active:border-green-400 rounded-2xl bg-gray-50/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg group text-green-900"
         >
-          <Filter className="h-5 w-5 mr-2 group-hover:rotate-180 transition-transform duration-300 text-green-700" />
+          <Filter className="h-5 w-5 mr-2 group-hover:rotate-180 transition-transform duration-300 text-green-600" />
           Advanced Filters
           {activeFiltersCount > 0 && (
-            <Badge className="ml-2 bg-green-600 animate-pulse text-white">
+            <Badge className="ml-2 bg-green-500 animate-pulse text-white">
               {activeFiltersCount}
             </Badge>
           )}
@@ -70,9 +70,9 @@ const SearchBar = ({
         <Button
           variant="outline"
           onClick={() => setShowReferral(!showReferral)}
-          className="h-14 px-6 border border-green-500 focus:border-green-600 active:border-green-600 rounded-2xl bg-gradient-to-r from-green-100 to-emerald-100 transition-all duration-300 hover:shadow-lg text-green-900"
+          className="h-14 px-6 border border-green-200 focus:border-green-400 active:border-green-400 rounded-2xl bg-gradient-to-r from-green-50 to-emerald-50 transition-all duration-300 hover:shadow-lg text-green-900"
         >
-          <Gift className="h-5 w-5 mr-2 text-green-700" />
+          <Gift className="h-5 w-5 mr-2 text-green-600" />
           Refer & Earn
         </Button>
       </div>
@@ -85,7 +85,7 @@ const SearchBar = ({
               key={filter}
               variant="outline"
               size="sm"
-            className="rounded-full bg-green-50/60 backdrop-blur-sm hover:bg-green-100 hover:border-green-600 focus:border-green-600 active:border-green-600 transition-all duration-300 hover:scale-105 text-green-700 border-green-500"
+              className="rounded-full bg-gray-50/60 backdrop-blur-sm hover:bg-green-100 hover:border-green-400 focus:border-green-400 active:border-green-400 transition-all duration-300 hover:scale-105 text-green-700 border-green-200"
             >
               {filter}
             </Button>
@@ -99,7 +99,7 @@ const SearchBar = ({
           <Button
             variant="outline"
             onClick={resetFilters}
-            className="rounded-xl bg-green-50 border-2 border-green-500 text-green-700"
+            className="rounded-xl bg-gray-50 border-2 border-green-200 text-green-700"
           >
             <RotateCcw className="h-4 w-4 mr-2" />
             Reset Filters
@@ -114,4 +114,3 @@ const SearchBar = ({
 }
 
 export default SearchBar
- 

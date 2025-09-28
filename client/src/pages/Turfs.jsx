@@ -9,15 +9,24 @@ import NotificationPanel from "../components/Notifications/NotificationPanel.jsx
 import FloatingActionButtons from "../components/FloatingActions/FloatingActionButtons.jsx";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useFilters } from "../hooks/useFilters";
-import { useUserLocation } from "../hooks/useUserLocation";
 import { shareTurf, getDirections, calculateCartTotal } from "../utils/turfUtils";
 import { getDistanceFromGoogleMaps } from "../utils/googleMapsUtils";
 import mockTurfs from "../mockTurfs";
 import { Button } from "../components/ui/Button";
 import { Search, RotateCcw } from "lucide-react";
 
+// Add these imports for the images
+import turf1 from "../assets/turf1.webp";
+import turf2 from "../assets/turf2.webp";
+import turf3 from "../assets/turf3.webp";
+import turf4 from "../assets/turf4.jpg";
+import turf5 from "../assets/turf5.jpeg";
+import turf6 from "../assets/turf6.webp";
+
 const mapContainerStyle = { width: "100%", height: "100%" };
 const defaultCenter = { lat: 19.076, lng: 72.8777 };
+
+const cardImages = [turf1, turf2, turf3, turf4, turf5, turf6];
 
 export default function Turfs() {
   const [turfs, setTurfs] = useState(mockTurfs);
@@ -44,7 +53,31 @@ export default function Turfs() {
 
   const [referralCode, setReferralCode] = useState("");
 
-  const userLocation = useUserLocation();
+  const [userLocation, setUserLocation] = useState(null);
+  const [locationError, setLocationError] = useState(null);
+
+  // Prompt for user location as soon as the component mounts
+  useEffect(() => {
+    if (!userLocation) {
+      if (navigator.geolocation) {
+        // This will trigger the browser's location permission prompt at page load
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            setUserLocation({
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+            });
+            setLocationError(null);
+          },
+          (err) => {
+            setLocationError("Location permission denied or unavailable.");
+          }
+        );
+      } else {
+        setLocationError("Geolocation is not supported by this browser.");
+      }
+    }
+  }, []); // <-- Only on mount
 
   // Load turfs from backend
   useEffect(() => {
@@ -117,6 +150,12 @@ export default function Turfs() {
 
   return (
     <div className="pt-20 px-4 max-w-7xl mx-auto">
+      {/* Optionally show a message if location is denied */}
+      {locationError && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-xl text-center">
+          {locationError}
+        </div>
+      )}
       <TopNavigation
         viewMode={viewMode}
         setViewMode={setViewMode}
@@ -179,7 +218,7 @@ export default function Turfs() {
         </div>
       ) : (
         <div className={viewMode === "list" ? "space-y-4" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"}>
-          {filteredTurfs.map((turf) => (
+          {filteredTurfs.map((turf, idx) => (
             <TurfCard
               key={turf.id}
               turf={turf}
@@ -191,6 +230,8 @@ export default function Turfs() {
               setSelectedTurf={setSelectedTurf}
               onBookSlot={handleBookSlot}
               distance={distances[turf.id]}
+              image={cardImages[idx % cardImages.length]}
+              index={idx}
             />
           ))}
         </div>

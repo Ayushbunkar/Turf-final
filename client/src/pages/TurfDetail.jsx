@@ -1,38 +1,38 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import turf1 from "../assets/turf1.webp";
 
 // Mock Turf Data (should come from API or context in real app)
 const turfData = [
   {
     id: 1,
-    name: 'Game ON',
-    location: 'Hoshangabad Road, Bhopal',
-    type: '5-a-side Turf',
+    name: "Game ON",
+    location: "Hoshangabad Road, Bhopal",
+    type: "5-a-side Turf",
     price: 1000,
     rating: 4.8,
-    image:
-      'https://images.unsplash.com/photo-1600250391125-075b0c4bcb78?auto=format&fit=crop&w=987&q=80',
+    image: turf1, // <-- Fix: use direct import, not { turf1 }
   },
   {
     id: 2,
-    name: 'Rush Arena',
-    location: 'Kolar Road, Bhopal',
-    type: '7-a-side Turf',
+    name: "Rush Arena",
+    location: "Kolar Road, Bhopal",
+    type: "7-a-side Turf",
     price: 1200,
     rating: 4.6,
     image:
-      'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=987&q=80',
+      "https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=987&q=80",
   },
   {
     id: 3,
-    name: 'Blaze Sports Club',
-    location: 'MP Nagar, Bhopal',
-    type: 'Futsal Arena',
+    name: "Blaze Sports Club",
+    location: "MP Nagar, Bhopal",
+    type: "Futsal Arena",
     price: 1500,
     rating: 4.9,
     image:
-      'https://images.unsplash.com/photo-1603052877333-dfa0d0d0f5b6?auto=format&fit=crop&w=987&q=80',
+      "https://images.unsplash.com/photo-1603052877333-dfa0d0d0f5b6?auto=format&fit=crop&w=987&q=80",
   },
 ];
 
@@ -85,6 +85,10 @@ const TurfDetail = () => {
                 src={turf.image}
                 alt={turf.name}
                 className="w-full h-80 object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/placeholder.svg";
+                }}
               />
             </motion.div>
 
